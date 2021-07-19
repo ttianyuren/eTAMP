@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot name="boxA">
+  <material name="Wood">
+    <color rgba="0.827 0.675 0.463 1.0"/>
+  </material>
+  <material name="Color">
+    <color rgba="0.125, 0.125, 0.631, 1.0"/>
+  </material>
+  <material name="Metal">
+    <color rgba="0.718, 0.753, 0.749, 1.0"/>
+  </material>
+  <link name="base_link">
+     <inertial>
+      <mass value="0.5" />
+      <!-- center of mass (com) is defined w.r.t. link local coordinate system -->
+      <origin xyz="0 0 -0.025" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.025" rpy="0 0 0" />
+      <geometry>
+        <box size="0.05 0.05 0.05" />
+      </geometry>
+      <material name="Color"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.025" rpy="0 0 0" />
+      <geometry>
+        <box size="0.05 0.05 0.05" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

@@ -1,0 +1,237 @@
+<robot name="pegboard">
+
+  <material name="Wood">
+    <color rgba="0.827 0.675 0.463 1.0"/>
+  </material>
+  <material name="LightWood">
+    <color rgba="0.992, 0.871, 0.682, 1.0"/>
+  </material>
+  <material name="Metal">
+    <color rgba="0.718, 0.753, 0.749, 1.0"/>
+  </material>
+
+
+  <link name="backboard">
+    <inertial>
+      <mass value="20.0" />
+      <origin xyz="0 0 -1.0" /> 
+      <inertia  ixx="2" ixy="0.0"  ixz="0.0"  iyy="2"  iyz="0.0"  izz="2" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 1.11 1.0"/>
+      </geometry>
+      <material name="Wood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 1.11 1.0"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="peg1">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+      <material name="Metal"/>
+    </visual>
+    <collision>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="peg2">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+      <material name="Metal"/>
+    </visual>
+    <collision>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="peg3">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+      <material name="Metal"/>
+    </visual>
+    <collision>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="peg4">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+      <material name="Metal"/>
+    </visual>
+    <collision>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="peg5">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+      <material name="Metal"/>
+    </visual>
+    <collision>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="peg6">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+      <material name="Metal"/>
+    </visual>
+    <collision>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="peg7">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+      <material name="Metal"/>
+    </visual>
+    <collision>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="peg8">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+      <material name="Metal"/>
+    </visual>
+    <collision>
+      <origin xyz="0.06 0 0" rpy="0 1.5706806282723 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.10"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="peg_on_board1" type="fixed">
+    <parent link="backboard"/>
+    <child link="peg1"/>
+    <origin xyz="0 -0.1 0"/>
+  </joint>
+  <joint name="peg_on_board2" type="fixed">
+    <parent link="backboard"/>
+    <child link="peg2"/>
+    <origin xyz="0 0.1 0"/>
+  </joint>
+  <joint name="peg_on_board3" type="fixed">
+    <parent link="backboard"/>
+    <child link="peg3"/>
+    <origin xyz="0 -0.3 0"/>
+  </joint>
+  <joint name="peg_on_board4" type="fixed">
+    <parent link="backboard"/>
+    <child link="peg4"/>
+    <origin xyz="0 0.3 0"/>
+  </joint>
+  <joint name="peg_on_board5" type="fixed">
+    <parent link="backboard"/>
+    <child link="peg5"/>
+    <origin xyz="0 0.1 0.3"/>
+  </joint>
+  <joint name="peg_on_board6" type="fixed">
+    <parent link="backboard"/>
+    <child link="peg6"/>
+    <origin xyz="0 -0.1 0.3"/>
+  </joint>
+  <joint name="peg_on_board7" type="fixed">
+    <parent link="backboard"/>
+    <child link="peg7"/>
+    <origin xyz="0 -0.3 0.3"/>
+  </joint>
+  <joint name="peg_on_board8" type="fixed">
+    <parent link="backboard"/>
+    <child link="peg8"/>
+    <origin xyz="0 0.3 0.3"/>
+  </joint>
+
+</robot>

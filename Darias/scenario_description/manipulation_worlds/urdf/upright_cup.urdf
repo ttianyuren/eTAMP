@@ -1,0 +1,36 @@
+<robot name="upright_cup">
+
+  <material name="Wood">
+    <color rgba="0.827 0.675 0.463 1.0"/>
+  </material>
+  <material name="Red">
+    <color rgba="1, 0, 0, 1.0"/>
+  </material>
+  <material name="Green">
+    <color rgba="0, 1, 0, 1.0"/>
+  </material>
+
+  <link name="bottom_seg">
+    <inertial>
+      <mass value="20.0" />
+      <origin xyz="0 0 -1.0" /> 
+      <inertia  ixx="2" ixy="0.0"  ixz="0.0"  iyy="2"  iyz="0.0"  izz="2" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.055" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.05" length="0.18"/>
+      </geometry>
+      <material name="Red"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.055" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.05" length="0.18"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+
+</robot>

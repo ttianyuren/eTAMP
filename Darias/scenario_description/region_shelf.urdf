@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot name="region">
+  <material name="Wood">
+    <color rgba="0.827, 0.675, 0.463, 1.0"/>
+  </material>
+  <material name="LightWood">
+    <color rgba="0.992, 0.871, 0.682, 1.0"/>
+  </material>
+  <material name="Metal">
+    <color rgba="0.718, 0.753, 0.749, 1.0"/>
+  </material>
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.000025" rpy="0 0 0" />
+      <geometry>
+        <box size="0.26 0.43 0.00005" />
+      </geometry>
+      <material name="LightWood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.000025" rpy="0 0 0" />
+      <geometry>
+        <box size="0.26 0.43 0.005" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

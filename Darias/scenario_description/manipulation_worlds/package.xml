@@ -1,0 +1,42 @@
+<package>
+  <name>manipulation_worlds</name>
+  <version>1.0.0</version>
+  <description>manipulation_worlds</description>
+  <maintainer email="dash@clearpathrobotics.com">Devon Ash</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/manipulation_worlds</url>
+  <!-- <url type="bugtracker"></url> -->
+
+  <author>Matei Ciocarlie</author>
+
+  <!-- Dependencies which this package needs to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Dependencies needed to compile this package. -->
+  <build_depend>gazebo</build_depend>
+  <build_depend>gazebo_worlds</build_depend>
+  <build_depend>pr2_gazebo</build_depend>
+  <build_depend>pr2_description</build_depend>
+  <build_depend>pr2_controller_configuration_gazebo</build_depend>
+
+  <!-- Dependencies needed after this package is compiled. -->
+  <run_depend>gazebo</run_depend>
+  <run_depend>gazebo_worlds</run_depend>
+  <run_depend>pr2_gazebo</run_depend>
+  <run_depend>pr2_description</run_depend>
+  <run_depend>pr2_controller_configuration_gazebo</run_depend>
+
+  <!-- Dependencies needed only for running tests. -->
+  <!-- <test_depend>gazebo</test_depend> -->
+  <!-- <test_depend>gazebo_worlds</test_depend> -->
+  <!-- <test_depend>pr2_gazebo</test_depend> -->
+  <!-- <test_depend>pr2_description</test_depend> -->
+  <!-- <test_depend>pr2_controller_configuration_gazebo</test_depend> -->
+
+<export>
+    <gazebo gazebo_media_path="${prefix}"/>
+</export>
+
+</package>

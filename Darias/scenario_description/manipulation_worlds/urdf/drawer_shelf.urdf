@@ -1,0 +1,549 @@
+<robot name="drawer_shelf">
+
+  <material name="Black">
+    <color rgba="0.0 0.0 0.0 1.0"/>
+  </material>
+  <material name="Blue">
+    <color rgba="0.1 0.4 0.8 1.0"/>
+  </material>
+  <material name="Green">
+    <color rgba="0.0 0.8 0.0 1.0"/>
+  </material>
+  <material name="Grey">
+    <color rgba="0.5 0.5 0.5 1.0"/>
+  </material>
+  <material name="Silver">
+    <color rgba="0.95 0.95 0.95 1.0"/>
+  </material>
+  <material name="Wood">
+    <color rgba="0.827 0.675 0.463 1.0"/>
+  </material>
+  <material name="LightWood">
+    <color rgba="0.992, 0.871, 0.682, 1.0"/>
+  </material>
+  <material name="Metal">
+    <color rgba="0.718, 0.753, 0.749, 1.0"/>
+  </material>
+
+
+  <link name="cabinet_bottom_plate">
+    <inertial>
+      <mass value="20.0" />
+      <origin xyz="0 0 -1.0" /> 
+      <inertia  ixx="2" ixy="0.0"  ixz="0.0"  iyy="2"  iyz="0.0"  izz="2" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.01" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+      <material name="Wood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.01" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+ <link name="cabinet_middle_plate1">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.76" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+      <material name="Wood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.76" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="cabinet_middle_plate2">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" /> 
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.51" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+      <material name="Wood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.51" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="cabinet_middle_plate3">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.26" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+      <material name="Wood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.26" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="cabinet_top_plate">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" /> 
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 1.01" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+      <material name="Wood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 1.01" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="cabinet_left_plate">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" /> 
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 -0.235 0.51" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.02 1.02"/>
+      </geometry>
+      <material name="Wood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.235 0.51" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.02 1.02"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="cabinet_right_plate">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" /> 
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0.235 0.51" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.02 1.02"/>
+      </geometry>
+      <material name="Wood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0.235 0.51" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.02 1.02"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="cabinet_back_plate">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 -5" /> 
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.185 0 0.51" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.45 1.02"/>
+      </geometry>
+      <material name="Wood"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.185 0 0.51" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.45 1.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="drawer_bottom_plate1">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+      <material name="LightWood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="drawer_left_plate1">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 -0.215 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.02 0.20"/>
+      </geometry>
+      <material name="LightWood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.215 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.02 0.20"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="drawer_right_plate1">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0.215 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.02 0.20"/>
+      </geometry>
+      <material name="LightWood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0.215 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.02 0.20"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="drawer_back_plate1">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.165 0 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.41 0.20"/>
+      </geometry>
+      <material name="LightWood"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.165 0 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.41 0.20"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="drawer_front_plate1">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0.185 0 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.47 0.24"/>
+      </geometry>
+      <material name="Wood"/>
+    </visual>
+    <collision>
+      <origin xyz="0.185 0 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.47 0.24"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="drawer_handle_cylinder1">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0.210 0 0.11" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0.210 0 0.11" rpy="1.5706806282723 0 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.15"/>
+      </geometry>
+      <material name="Metal"/>
+    </visual>
+    <collision>
+      <origin xyz="0.210 0 0.11" rpy="1.5706806282723 0 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.15"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+    <link name="drawer_bottom_plate2">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+      <material name="LightWood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.45 0.02"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="drawer_left_plate2">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 -0.215 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.02 0.20"/>
+      </geometry>
+      <material name="LightWood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 -0.215 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.02 0.20"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="drawer_right_plate2">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0.215 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.02 0.20"/>
+      </geometry>
+      <material name="LightWood"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0.215 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.35 0.02 0.20"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="drawer_back_plate2">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.165 0 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.41 0.20"/>
+      </geometry>
+      <material name="LightWood"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.165 0 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.41 0.20"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="drawer_front_plate2">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0.0" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0.185 0 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.47 0.24"/>
+      </geometry>
+      <material name="Wood"/>
+    </visual>
+    <collision>
+      <origin xyz="0.185 0 0.11" rpy="0 0 0" />
+      <geometry>
+        <box size="0.02 0.47 0.24"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="drawer_handle_cylinder2">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0.210 0 0.11" />
+      <inertia  ixx="0.01" ixy="0.0"  ixz="0.0"  iyy="0.01"  iyz="0.0"  izz="0.01" />
+    </inertial>
+    <visual>
+      <origin xyz="0.210 0 0.11" rpy="1.5706806282723 0 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.15"/>
+      </geometry>
+      <material name="Metal"/>
+    </visual>
+    <collision>
+      <origin xyz="0.210 0 0.11" rpy="1.5706806282723 0 0" />
+      <geometry>
+        <cylinder radius="0.01" length="0.15"/>
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint name="middle_plate1" type="fixed">
+    <parent link="cabinet_bottom_plate"/>
+    <child link="cabinet_middle_plate1"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="middle_plate2" type="fixed">
+    <parent link="cabinet_bottom_plate"/>
+    <child link="cabinet_middle_plate2"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="middle_plate3" type="fixed">
+    <parent link="cabinet_bottom_plate"/>
+    <child link="cabinet_middle_plate3"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="top_plate" type="fixed">
+    <parent link="cabinet_bottom_plate"/>
+    <child link="cabinet_top_plate"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="left_plate" type="fixed">
+    <parent link="cabinet_bottom_plate"/>
+    <child link="cabinet_left_plate"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="right_plate" type="fixed">
+    <parent link="cabinet_bottom_plate"/>
+    <child link="cabinet_right_plate"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="back_plate" type="fixed">
+    <parent link="cabinet_bottom_plate"/>
+    <child link="cabinet_back_plate"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+
+
+  <joint name="drawer_rail1" type="prismatic">
+    <parent link="cabinet_bottom_plate"/>
+    <child link="drawer_bottom_plate1"/>
+    <origin rpy="0 0 0" xyz="0 0 0.28"/>
+    <axis xyz="1 0 0"/>
+    <limit upper="0.40" lower="0" velocity="100" effort="100"/>
+  </joint>
+  <joint name="drawer_left1" type="fixed">
+    <parent link="drawer_bottom_plate1"/>
+    <child link="drawer_left_plate1"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="drawer_right1" type="fixed">
+    <parent link="drawer_bottom_plate1"/>
+    <child link="drawer_right_plate1"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="drawer_back1" type="fixed">
+    <parent link="drawer_bottom_plate1"/>
+    <child link="drawer_back_plate1"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="drawer_front1" type="fixed">
+    <parent link="drawer_bottom_plate1"/>
+    <child link="drawer_front_plate1"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="drawer_handle1" type="fixed">
+    <parent link="drawer_bottom_plate1"/>
+    <child link="drawer_handle_cylinder1"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+
+  <joint name="drawer_rail2" type="prismatic">
+    <parent link="cabinet_bottom_plate"/>
+    <child link="drawer_bottom_plate2"/>
+    <origin rpy="0 0 0" xyz="0 0 0.03"/>
+    <axis xyz="1 0 0"/>
+    <limit upper="0.40" lower="0" velocity="100" effort="100"/>
+  </joint>
+  <joint name="drawer_left2" type="fixed">
+    <parent link="drawer_bottom_plate2"/>
+    <child link="drawer_left_plate2"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="drawer_right2" type="fixed">
+    <parent link="drawer_bottom_plate2"/>
+    <child link="drawer_right_plate2"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="drawer_back2" type="fixed">
+    <parent link="drawer_bottom_plate2"/>
+    <child link="drawer_back_plate2"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="drawer_front2" type="fixed">
+    <parent link="drawer_bottom_plate2"/>
+    <child link="drawer_front_plate2"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+  <joint name="drawer_handle2" type="fixed">
+    <parent link="drawer_bottom_plate2"/>
+    <child link="drawer_handle_cylinder2"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+
+  <gazebo reference="cabinet_bottom_plate">
+    <mu1>100.0</mu1>
+    <mu2>100.0</mu2>
+  </gazebo>
+  <gazebo>
+    <static>true</static>
+  </gazebo>
+</robot>
