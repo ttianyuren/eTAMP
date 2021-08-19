@@ -5,7 +5,11 @@
 
 ## Installation
 
-Recompiling of symk may be needed.
+### Compiling the Top-k Planner
+```console
+$ cd symk
+$ ./build.py 
+```
 
 ## Examples
 
