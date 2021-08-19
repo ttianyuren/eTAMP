@@ -27,7 +27,7 @@ def find_build(fd_path):
         if os.path.exists(path):
             return path
     # TODO: could also just automatically compile
-    raise RuntimeError('Please compile symk first [.../pddlstream$ ./symk/build.py]')
+    raise RuntimeError('Please compile symk planner first [./symk/build.py]')
 
 
 TRANSLATE_PATH = os.path.join(find_build(FD_PATH), 'bin/translate')

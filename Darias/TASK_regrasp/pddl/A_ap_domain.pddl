@@ -1,4 +1,4 @@
-;15:55:23 19/08
+;16:02:17 19/08
 
 (define (domain pick-and-place)
    (:requirements :strips :equality :action-costs)

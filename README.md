@@ -7,8 +7,7 @@
 
 ### Compiling the Top-k Planner
 ```console
-$ cd symk
-$ ./build.py 
+$ ./symk/build.py
 ```
 
 ## Examples
