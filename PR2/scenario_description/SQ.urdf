@@ -1,0 +1,27 @@
+<?xml version="0.0" ?>
+<robot name="SQ">
+  <material name="Color">
+    <color rgba="0.855, 0.086, 0.976, 1.0"/>
+  </material>
+  <link name="ST1">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value=".0"/>
+       <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+		<mesh filename="SQ.obj" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Color"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 	<mesh filename="SQ.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+</robot>
+

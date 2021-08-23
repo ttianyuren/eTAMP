@@ -1,19 +1,20 @@
 #!/usr/bin/env python
-from run_branch_regrasp import *
-import os
+from run_branch import *
 
 
 #######################################################
 
-def eTAMP_session():
+def exp():
     visualization = 0
     connect(use_gui=visualization)
 
-    PlanningScenario = get_scn(2)
     scn = PlanningScenario()
 
     pddlstream_problem = get_pddlstream_problem(scn)
     _, _, _, _, stream_info, action_info = pddlstream_problem
+
+    # pr = cProfile.Profile()
+    # pr.enable()
 
     st = time.time()
 
@@ -25,22 +26,20 @@ def eTAMP_session():
     concrete_plan = None
     num_attempts = 0
     thinking_time = 0
-    while concrete_plan is None and thinking_time < 60 * 10:
+    while concrete_plan is None and thinking_time < 60 * 20:
         # Progressive Widening
         e_root.visits += 1
         # alpha = 0.3
         # need_expansion = np.floor(e_root.visits ** alpha) > np.floor(
         #     (e_root.visits - 1) ** alpha)
-        flag_pw = e_root.visits > 9.5 * (len(e_root.children) ** 2)  # 8.5
+        flag_pw = e_root.visits > 8.5 * (len(e_root.children) ** 2)
         need_expansion = e_root.num_children < 1 or flag_pw
         need_expansion = need_expansion and (e_root.num_children < sk_batch.num_ap)
-        # need_expansion = e_root.num_children < 1
         if need_expansion:
             op_plan = sk_batch.get_next_operatorPlan()
             assert op_plan is not None
             skeleton_env = SkeletonEnv(e_root.num_children, op_plan,
-                                       get_update_env_reward_fn(scn, action_info),
-                                       stream_info, scn, use_bo=False)
+                                       get_update_env_reward_fn(scn, action_info), stream_info, scn)
             selected_branch = PlannerUCT(skeleton_env)
             e_root.add_child(selected_branch)
         else:
@@ -49,13 +48,6 @@ def eTAMP_session():
         # print('total_node: ', e_root.total_node)
         num_attempts += 1
         thinking_time = time.time() - st
-
-        if (e_root.visits + 1) % 10 == 0:
-            with open('ctype_to_constraints.pk', 'wb') as f:
-                pk.dump(Constraint.ctype_to_constraints, f)
-                for ctype, cs in Constraint.ctype_to_constraints.items():
-                    print(f"#{ctype}# {cs[0]}: {len([c for c in cs if c.yg <= 0])}-{len([c for c in cs if c.yg > 0])}")
-
     print('think time: ' + str(thinking_time))
     # e_root.save_the_tree(idx)
 
@@ -70,13 +62,10 @@ def eTAMP_session():
 
 
 if __name__ == '__main__':
-
-
-
     list_report_vnts = []
     for i in range(100):
         print(f'exp {i} -------------------------------------------------------------------')
-        result_vnts = eTAMP_session()
+        result_vnts = exp()
         list_report_vnts.append(result_vnts)
 
         print('======================')
