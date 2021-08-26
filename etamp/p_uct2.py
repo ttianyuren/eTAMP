@@ -160,6 +160,7 @@ class PlannerUCT(object):
             self.edges = []
             # root_state = self.env.get_root_state()
             self.root_node = Node(0, None, self.env)
+            self.root_node.saved_world = self.env.get_saved_world()
 
             self.id_to_node[self.root_node.id] = self.root_node
 
@@ -194,6 +195,7 @@ class PlannerUCT(object):
             """Decision Node"""
             flag_pw = cur_node.visits > 0.3 * (len(cur_node.children) ** 2)  # 0.5
             if (flag_pw or (not cur_node.active_children)) and cur_node.is_expandable:
+                """Update the environment state before making new decision"""
                 next_node = Node(cur_node.depth + 1, cur_node, self.env)
                 self.update_graph(cur_node, next_node)
                 self.list_decision_temp.append((cur_node.depth, next_node.decision, 'new'))

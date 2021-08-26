@@ -46,9 +46,9 @@ class PlanningScenario(object):
                     "box4": create_box(.07, .07, .1, mass=mass, color=(0, 0.7, 0.7, 1)),
                     "box5": create_box(.07, .07, .1, mass=mass, color=(0.7, 0, 0.7, 1)),
                     "box6": create_box(.07, .07, .1, mass=mass, color=(0.7, 0.7, 0, 1)),
-                    "box7": create_box(.07, .07, .1, mass=mass, color=(0, 0.8, 0.6, 1)),
-                    "box8": create_box(.07, .07, .1, mass=mass, color=(0.8, 0, 0.6, 1)),
-                    "box9": create_box(.07, .07, .1, mass=mass, color=(0.6, 0.8, 0, 1)),
+                    # "box7": create_box(.07, .07, .1, mass=mass, color=(0, 0.8, 0.6, 1)),
+                    # "box8": create_box(.07, .07, .1, mass=mass, color=(0.8, 0, 0.6, 1)),
+                    # "box9": create_box(.07, .07, .1, mass=mass, color=(0.6, 0.8, 0, 1)),
 
                 }
                 self.bd_body.update(dict((self.bd_body[k], k) for k in self.bd_body))
@@ -70,9 +70,9 @@ class PlanningScenario(object):
                 set_point(self.bd_body['box4'], (self.pos_table[0] - 0.12, self.pos_table[1] - 0.0, self.h + .1 / 2))
                 set_point(self.bd_body['box5'], (self.pos_table[0] - 0.0, self.pos_table[1] - 0.0, self.h + .1 / 2))
                 set_point(self.bd_body['box6'], (self.pos_table[0] + 0.12, self.pos_table[1] - 0.0, self.h + .1 / 2))
-                set_point(self.bd_body['box7'], (self.pos_table[0] - 0.12, self.pos_table[1] + 0.12, self.h + .1 / 2))
-                set_point(self.bd_body['box8'], (self.pos_table[0] - 0.0, self.pos_table[1] + 0.12, self.h + .1 / 2))
-                set_point(self.bd_body['box9'], (self.pos_table[0] + 0.12, self.pos_table[1] + 0.12, self.h + .1 / 2))
+                # set_point(self.bd_body['box7'], (self.pos_table[0] - 0.12, self.pos_table[1] + 0.12, self.h + .1 / 2))
+                # set_point(self.bd_body['box8'], (self.pos_table[0] - 0.0, self.pos_table[1] + 0.12, self.h + .1 / 2))
+                # set_point(self.bd_body['box9'], (self.pos_table[0] + 0.12, self.pos_table[1] + 0.12, self.h + .1 / 2))
 
                 set_camera(75, -45, 2.7, Point())
 
@@ -80,7 +80,8 @@ class PlanningScenario(object):
 
         self.movable_bodies = [self.bd_body['box1'], self.bd_body['box2'], self.bd_body['box3'],
                                self.bd_body['box4'], self.bd_body['box5'], self.bd_body['box6'],
-                               self.bd_body['box7'], self.bd_body['box8'], self.bd_body['box9'], ]
+                               # self.bd_body['box7'], self.bd_body['box8'], self.bd_body['box9'],
+                               ]
         self.env_bodies = [self.bd_body['floor']]
         self.regions = [self.bd_body['table'], self.bd_body['sink'], self.bd_body['stove']]
 

@@ -118,6 +118,7 @@ class Node(object):
         if self.is_root:
             return
         """2. Try to concrete its parent node."""
+        self.parent.restore_world()  # restore the world state
         if self.parent.is_decision_node:
             self.decision = self.parent.sample_new_decision(env)
             # print(self.decision)
@@ -125,18 +126,34 @@ class Node(object):
                                                                                         self.parent.var_mapping,
                                                                                         self.decision)
         else:
+            # the world state will be changed here
             self.add_mapping, self.step_terminal, self.action_reward, digraph, sdg_msg = env.apply_transition(
                 self.parent.depth,
                 self.parent.var_mapping)
+
         self.is_terminal = (self.step_terminal is not None)
         self.is_final = self.is_terminal or self.is_leaf
         self.is_successful = self.is_leaf and not self.is_terminal
+
+        self.saved_world = None  # for the root node, it is the initial environment state
+        if not self.is_terminal and not self.is_decision_node:
+            # if the world state is changed successfully, save it.
+            self.saved_world = env.get_saved_world()
 
         self.parent.children.append(self)
 
         update_constraint(self, env, digraph, sdg_msg)
 
     """Both Nodes"""
+
+    def restore_world(self):
+        if self.saved_world:
+            self.saved_world.restore()
+        else:
+            node = self
+            while node.saved_world is None:
+                node = node.parent
+            node.restore_world()
 
     @property
     def var_mapping(self):
@@ -164,12 +181,12 @@ class Node(object):
 
         if self.is_final:
             self.back_propagate()
-        else:
-            """set the environment"""
-            if self.is_root:
-                env.scene_reset_fn()
-            else:
-                env.set_env_depth(self.parent.depth, self.var_mapping)
+        # else:
+        #     """set the environment"""
+        #     if self.is_root:
+        #         env.scene_reset_fn()
+        #     else:
+        #         env.set_env_depth(self.parent.depth, self.var_mapping)
 
     @property
     def active_children(self):

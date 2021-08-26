@@ -19,7 +19,7 @@ def exp():
     st = time.time()
 
     sk_batch = solve_progressive2(pddlstream_problem,
-                                  num_optms_init=80, target_sk=20)
+                                  num_optms_init=80, target_sk=50)
 
     e_root = ExtendedNode()
 
@@ -32,7 +32,7 @@ def exp():
         # alpha = 0.3
         # need_expansion = np.floor(e_root.visits ** alpha) > np.floor(
         #     (e_root.visits - 1) ** alpha)
-        flag_pw = e_root.visits > 8.5 * (len(e_root.children) ** 2)
+        flag_pw = e_root.visits > 6 * (len(e_root.children) ** 2)
         need_expansion = e_root.num_children < 1 or flag_pw
         need_expansion = need_expansion and (e_root.num_children < sk_batch.num_ap)
         if need_expansion:
@@ -44,7 +44,7 @@ def exp():
             e_root.add_child(selected_branch)
         else:
             selected_branch = e_root.select_child_ucb()
-        concrete_plan = selected_branch.think(1, visualization)
+        concrete_plan = selected_branch.think(1, 0)
         # print('total_node: ', e_root.total_node)
         num_attempts += 1
         thinking_time = time.time() - st

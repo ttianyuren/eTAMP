@@ -7,7 +7,7 @@ from .stream import is_active_arg
 from .pddlstream.language.object import Object, OptimisticObject, EXE_Object, EXE_OptimisticObject, get_hash
 from sklearn.metrics import pairwise_distances_argmin_min
 from .topk_skeleton import EXE_Action, EXE_Stream, remap_action_args
-from utils.pybullet_tools.utils import get_center_extent
+from utils.pybullet_tools.utils import get_center_extent, WorldSaver
 from utils.pybullet_tools.kuka_primitives3 import GraspDirection
 from .decision_sampler import DecisionInfo, SamplerContinuous, SamplerDiscrete, format_continous
 from .constraint_graph import Constraint
@@ -647,6 +647,10 @@ class SkeletonEnv(object):
             if isinstance(op, EXE_Action):
                 concrete_action = remap_action_args(op, mapping)
                 self.update_env_reward_fn([concrete_action])
+
+    def get_saved_world(self):
+        saved_world = WorldSaver()
+        return saved_world
 
     @property
     def problematic_streams(self):

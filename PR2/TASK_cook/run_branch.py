@@ -233,8 +233,8 @@ def get_pddlstream_problem(scn):
             # ('On', scn.bd_body['box1'], scn.bd_body['table']),
             ('Cooked', scn.bd_body['box1']),
             ('Cooked', scn.bd_body['box2']),
-            # ('Cooked', scn.bd_body['box3']),
-            # ('Cooked', scn.bd_body['box4']),
+            ('Cooked', scn.bd_body['box3']),
+            ('Cooked', scn.bd_body['box4']),
             # ('Cooked', scn.bd_body['box5']),
             # ('Cooked', scn.bd_body['box6']),
             )
@@ -257,7 +257,7 @@ def get_pddlstream_problem(scn):
 #######################################################
 
 def main():
-    visualization = 0
+    visualization = 1
     connect(use_gui=visualization)
 
     scn = PlanningScenario()
@@ -273,8 +273,8 @@ def main():
     new_problem = 1
     if new_problem:
         sk_batch = solve_progressive2(pddlstream_problem,
-                                      num_optms_init=80, target_sk=20)
-        op_plan = sk_batch.generate_operatorPlan(3)  # 6
+                                      num_optms_init=80, target_sk=1)
+        op_plan = sk_batch.generate_operatorPlan(0)  # 6
     else:
         with open('C_operatorPlans/C_op_sas.1.pk', 'rb') as f:
             op_plan = pk.load(f)
@@ -286,7 +286,7 @@ def main():
                                stream_info, scn)
     selected_branch = PlannerUCT(skeleton_env)
 
-    concrete_plan = selected_branch.think(900, visualization)
+    concrete_plan = selected_branch.think(900, False)
 
     if concrete_plan is None:
         print('TAMP is failed.', concrete_plan)

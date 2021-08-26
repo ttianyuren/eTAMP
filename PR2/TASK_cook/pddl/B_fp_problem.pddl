@@ -1,36 +1,30 @@
-;17:18:50 23/08
+;15:15:16 26/08
 
-;Skeleton_SN = 0
+;Skeleton_SN = 1
 
 (define (problem put-wuti_propo)
    (:domain pr2-tamp_propo)
 
    (:objects
-          q976 - config
-          o10 o11 o12 o13 o2 o3 o4 o5 o6 o7 o8 o9 - wuti
+          q8 - config
+          o10 o2 o3 o4 o5 o6 o7 o8 o9 - wuti
           'left' 'right' - arm
-          p0 p168 p224 p280 p336 p392 p448 p504 p56 - pose
-          _p0 _p1 _p10 _p11 _p12 _p13 _p14 _p15 _p16 _p17 _p18 _p19 _p2 _p3 _p4 _p5 _p6 _p7 _p8 _p9 - propo_action
+          p224 p480 p536 p592 p624 p800 - pose
+          _p0 _p1 _p10 _p11 _p12 _p13 _p14 _p15 _p16 _p17 _p18 _p19 _p2 _p20 _p21 _p22 _p23 _p24 _p25 _p26 _p27 _p28 _p29 _p3 _p30 _p31 _p32 _p33 _p34 _p35 _p36 _p37 _p4 _p5 _p6 _p7 _p8 _p9 - propo_action
    )
 
    (:init
-          (atbconf q976)
-          (atpose o10 p336)
-          (atpose o11 p392)
-          (atpose o12 p448)
-          (atpose o13 p504)
-          (atpose o5 p0)
-          (atpose o6 p168)
-          (atpose o7 p56)
-          (atpose o8 p224)
-          (atpose o9 p280)
+          (atbconf q8)
+          (atpose o10 p592)
+          (atpose o5 p800)
+          (atpose o6 p224)
+          (atpose o7 p624)
+          (atpose o8 p480)
+          (atpose o9 p536)
           (canmove)
           (canoperate)
           (controllable 'left')
           (graspable o10)
-          (graspable o11)
-          (graspable o12)
-          (graspable o13)
           (graspable o5)
           (graspable o6)
           (graspable o7)
@@ -40,29 +34,17 @@
           (handempty 'right')
           (isarm 'left')
           (isarm 'right')
-          (isbconf q976)
-          (ispose o10 p336)
-          (ispose o11 p392)
-          (ispose o12 p448)
-          (ispose o13 p504)
-          (ispose o5 p0)
-          (ispose o6 p168)
-          (ispose o7 p56)
-          (ispose o8 p224)
-          (ispose o9 p280)
+          (isbconf q8)
+          (ispose o10 p592)
+          (ispose o5 p800)
+          (ispose o6 p224)
+          (ispose o7 p624)
+          (ispose o8 p480)
+          (ispose o9 p536)
           (sink o3)
           (stackable o10 o2)
           (stackable o10 o3)
           (stackable o10 o4)
-          (stackable o11 o2)
-          (stackable o11 o3)
-          (stackable o11 o4)
-          (stackable o12 o2)
-          (stackable o12 o3)
-          (stackable o12 o4)
-          (stackable o13 o2)
-          (stackable o13 o3)
-          (stackable o13 o4)
           (stackable o5 o2)
           (stackable o5 o3)
           (stackable o5 o4)
@@ -79,20 +61,17 @@
           (stackable o9 o3)
           (stackable o9 o4)
           (stove o4)
-          (supported o10 p336 o2)
-          (supported o11 p392 o2)
-          (supported o12 p448 o2)
-          (supported o13 p504 o2)
-          (supported o5 p0 o2)
-          (supported o6 p168 o2)
-          (supported o7 p56 o2)
-          (supported o8 p224 o2)
-          (supported o9 p280 o2)
+          (supported o10 p592 o2)
+          (supported o5 p800 o2)
+          (supported o6 p224 o2)
+          (supported o7 p624 o2)
+          (supported o8 p480 o2)
+          (supported o9 p536 o2)
           (_applicable _p0)
    )
 
    (:goal
-        (_applicable _p19)
+        (_applicable _p37)
    )
 
 )
