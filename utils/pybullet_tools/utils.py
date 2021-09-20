@@ -536,6 +536,15 @@ class LockRenderer(Saver):
 CLIENTS = set()
 
 
+def draw_contacts():
+    contact_points = p.getContactPoints()
+    for pt in contact_points:
+        positionOnA = pt[5]
+        positionOnB = pt[6]
+        draw_point(positionOnA, 0.1, width=2, color=(1, 1, 0), lifetime=15)
+        draw_point(positionOnB, 0.1, width=2, color=(0, 1, 1), lifetime=15)
+
+
 def connect(use_gui=True, shadows=True):
     # Shared Memory: execute the physics simulation and rendering in a separate process
     # https://github.com/bulletphysics/bullet3/blob/master/examples/pybullet/examples/vrminitaur.py#L7
@@ -562,7 +571,6 @@ def connect(use_gui=True, shadows=True):
         p.configureDebugVisualizer(p.COV_ENABLE_DEPTH_BUFFER_PREVIEW, False, physicsClientId=sim_id)
         p.configureDebugVisualizer(p.COV_ENABLE_SEGMENTATION_MARK_PREVIEW, False, physicsClientId=sim_id)
         p.configureDebugVisualizer(p.COV_ENABLE_SHADOWS, shadows, physicsClientId=sim_id)
-
 
     # you can also use GUI mode, for faster OpenGL rendering (instead of TinyRender CPU)
     # visualizer_options = {
@@ -3325,6 +3333,24 @@ def is_placement(body, surface, **kwargs):
     return is_placed_on_aabb(body, get_aabb(surface), **kwargs)
 
 
+def get_placement_point_hanoi(surface):
+    point_surface = get_point(surface)
+    bottom_aabb = get_aabb(surface)
+    z = bottom_aabb[1][2] - 0.06
+    point = np.array([point_surface[0], point_surface[1], z])
+    return point
+
+
+def is_placement_hanoi(body, surface):
+    p0 = get_placement_point_hanoi(surface)
+    p1 = get_point(body)
+
+    if np.abs(p1[0] - p0[0]) + np.abs(p1[1] - p0[1]) < 0.001 and np.abs(p1[2] - p0[2]) < 0.01:
+        return True
+    else:
+        return False
+
+
 def is_center_stable(body, surface, epsilon=1e-2):
     """
     Return True if the body's center is contained by the surface, and they are aligned in z-direction.
@@ -3804,7 +3830,7 @@ def is_pose_close(pose, target_pose, pos_tolerance=1e-3, ori_tolerance=1e-3 * np
     return True
 
 
-def inverse_kinematics(robot, link, target_pose, max_iterations=200, custom_limits={}, **kwargs):
+def inverse_kinematics(robot, link, target_pose, max_iterations=100, custom_limits={}, **kwargs):
     movable_joints = get_movable_joints(robot)
 
     for iterations in range(max_iterations):
@@ -3887,7 +3913,7 @@ def get_null_space(robot, joints, custom_limits={}):
 
 
 def plan_cartesian_motion(robot, first_joint, target_link, waypoint_poses,
-                          max_iterations=200, custom_limits={}, **kwargs):
+                          max_iterations=100, custom_limits={}, **kwargs):
     # TODO: fix stationary joints
     # TODO: pass in set of movable joints and take least common ancestor
     # TODO: update with most recent bullet updates
@@ -3908,12 +3934,14 @@ def plan_cartesian_motion(robot, first_joint, target_link, waypoint_poses,
     solutions = []
     for target_pose in waypoint_poses:
         for iteration in range(max_iterations):
+
             sub_kinematic_conf = inverse_kinematics_helper(sub_robot, selected_target_link, target_pose,
                                                            null_space=null_space)
             if sub_kinematic_conf is None:
                 remove_body(sub_robot)
                 return None
             set_joint_positions(sub_robot, sub_movable_joints, sub_kinematic_conf)
+            # set_joint_positions(robot, selected_movable_joints, sub_kinematic_conf)
             if is_pose_close(get_link_pose(sub_robot, selected_target_link), target_pose, **kwargs):
                 set_joint_positions(robot, selected_movable_joints, sub_kinematic_conf)
                 kinematic_conf = get_configuration(robot)
@@ -3923,9 +3951,10 @@ def plan_cartesian_motion(robot, first_joint, target_link, waypoint_poses,
                     #       zip(movable_joints, lower_limits, kinematic_conf, upper_limits) if not (l <= v <= u)])
                     # print("Limits violated")
                     # wait_for_user()
+                    """l_wrist_flex_joint and l_wrist_flex_joint from upper=0.0 to upper=1.0"""
+
                     remove_body(sub_robot)
                     return None
-                # print("IK iterations:", iteration)
                 solutions.append(kinematic_conf)
                 break
         else:

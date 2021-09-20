@@ -26,7 +26,7 @@ def exp():
     concrete_plan = None
     num_attempts = 0
     thinking_time = 0
-    while concrete_plan is None and thinking_time < 60 * 20:
+    while concrete_plan is None and thinking_time < 300:
         # Progressive Widening
         e_root.visits += 1
         # alpha = 0.3

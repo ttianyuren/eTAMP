@@ -20,7 +20,7 @@ from etamp.pddlstream.utils import read, INF, get_file_path, find_unique
 from etamp.p_uct2 import PlannerUCT
 from etamp.tree_node2 import ExtendedNode
 from etamp.env_sk_branch import SkeletonEnv
-from build_scenario import PlanningScenario
+from build_scenario import Scene_unpack3,Scene_unpack2,Scene_unpack1
 
 
 def get_fixed(robot, movable):
@@ -215,7 +215,7 @@ def main(display=True, teleport=False):
 
     connect(use_gui=visualization)
 
-    scn = PlanningScenario()
+    scn = Scene_unpack2()
 
     saved_world = WorldSaver()
     # dump_world()
@@ -266,7 +266,7 @@ def main(display=True, teleport=False):
     if not visualization:  # TODO: how to reenable the viewer
         disconnect()
         connect(use_gui=True)
-        PlanningScenario()
+        Scene_unpack3()
     else:
         saved_world.restore()
 

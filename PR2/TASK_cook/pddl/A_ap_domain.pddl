@@ -1,4 +1,4 @@
-;15:14:32 26/08
+;09:54:51 10/09
 
 (define (domain pr2-tamp)
    (:requirements :strips :equality :action-costs)

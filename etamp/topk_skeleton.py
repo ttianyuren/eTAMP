@@ -4,7 +4,7 @@ import pickle
 from datetime import datetime
 from collections import defaultdict, namedtuple
 
-from .pddlstream.language.object import Object, OptimisticObject, get_hash
+from .pddlstream.language.object import Object, OptimisticObject, get_hash, EXE_OptimisticObject, EXE_Object
 from .pddlstream.utils import read, INF
 from .pddlstream.algorithms.downward import parse_lisp
 from .pddlstream.language.constants import pAction, pA_info, pAtom
@@ -67,6 +67,10 @@ class EXE_Action(object):
     def __hash__(self):
         return get_hash(self.name + str(self.parameters) + str(self.add_effects))
 
+    @property
+    def essence(self):
+        return self.name, tuple([(p.pddl if not isinstance(p, EXE_OptimisticObject) else '#') for p in self.parameters])
+
 
 class EXE_Stream(object):
     def __init__(self, name, inputs, outputs):
@@ -90,6 +94,12 @@ class EXE_Stream(object):
 
     def __hash__(self):
         return get_hash(self.name + str(self.inputs) + str(self.outputs))
+
+    @property
+    def essence(self):
+        return self.name, tuple(
+            [(p.pddl if not isinstance(p, EXE_OptimisticObject) else '#') for p in self.inputs]), tuple(
+            [(p.pddl if not isinstance(p, EXE_OptimisticObject) else '#') for p in self.outputs])
 
 
 def remap_action_args(action, mapping, all_para=False):
@@ -444,14 +454,21 @@ def dump_problem(nt_problem, file_name, comment=''):
         f.write(')\n')
 
 
-def propo_domain_problem(original_domain, original_problem, optms_results, sas_file_path, stream_file):
-    """For stream_plan retrace."""
+def read_action_blocks_from_file(sas_file_path):
     sas_plan_text = read(sas_file_path)
 
     action_lines = sas_plan_text.splitlines()
     action_lines = [l for l in action_lines if not l.startswith(';')]
 
     action_blocks = [l[1:-1].split(' ') for l in action_lines]
+
+    return action_blocks
+
+
+def propo_domain_problem(original_domain, original_problem, optms_results, sas_file_path, stream_file):
+    """For stream_plan retrace."""
+
+    action_blocks = read_action_blocks_from_file(sas_file_path)
 
     """Domain"""
     new_actions = []
@@ -959,11 +976,13 @@ def sk_from_file(path):
 def filter_skeleton(raw_files, target_num):
     new_files = []
     existing_sk = set()
+    optms_to_remove = []
 
     for f in raw_files:
         sk = sk_from_file(f)
         if sk in existing_sk or len(new_files) >= target_num:
             os.remove(f)
+
         else:
             existing_sk.add(sk)
             new_files.append(f)
@@ -1083,3 +1102,18 @@ class TopkSkeleton(object):
 
     def get_next_operatorPlan(self):
         return self.generate_operatorPlan(self.pointer)
+
+    def get_actionEssence(self, pointer):
+        if pointer >= self.num_ap:
+            return None
+
+        ap_file = self.ap_files[pointer]
+        action_blocks = read_action_blocks_from_file(ap_file)
+
+        actionEssence = []
+        for block in action_blocks:
+            action_name = block[0]
+            para_tuple = tuple([(i if i[0] != '#' else '#') for i in block[1:]])
+            actionEssence.append((action_name, para_tuple))
+
+        return actionEssence

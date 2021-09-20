@@ -41,9 +41,11 @@ PR2_GROUPS = {
     'base': ['x', 'y', 'theta'],
     'torso': ['torso_lift_joint'],
     'head': ['head_pan_joint', 'head_tilt_joint'],
-    arm_from_arm('left'): ['l_shoulder_pan_joint', 'l_shoulder_lift_joint', 'l_upper_arm_roll_joint',
+    arm_from_arm('left'): ['l_shoulder_pan_joint', 'l_shoulder_lift_joint',
+                           'l_upper_arm_roll_joint',
                            'l_elbow_flex_joint', 'l_forearm_roll_joint', 'l_wrist_flex_joint', 'l_wrist_roll_joint'],
-    arm_from_arm('right'): ['r_shoulder_pan_joint', 'r_shoulder_lift_joint', 'r_upper_arm_roll_joint',
+    arm_from_arm('right'): ['r_shoulder_pan_joint', 'r_shoulder_lift_joint',
+                            'r_upper_arm_roll_joint',
                             'r_elbow_flex_joint', 'r_forearm_roll_joint', 'r_wrist_flex_joint', 'r_wrist_roll_joint'],
     gripper_from_arm('left'): ['l_gripper_l_finger_joint', 'l_gripper_r_finger_joint',
                                'l_gripper_l_finger_tip_joint', 'l_gripper_r_finger_tip_joint'],
@@ -79,6 +81,8 @@ TOOL_POSE = Pose(euler=Euler(pitch=np.pi / 2))  # l_gripper_tool_frame (+x out o
 
 TOP_HOLDING_LEFT_ARM = [0.67717021, -0.34313199, 1.2, -1.46688405, 1.24223229, -1.95442826, 2.22254125]
 SIDE_HOLDING_LEFT_ARM = [0.39277395, 0.33330058, 0., -1.52238431, 2.72170996, -1.21946936, -2.98914779]
+SIDE_HOLDING_RIGHT_ARM = [-0.39277395, 0.33330058, 0., -1.52238431, 2.72170996, -1.21946936, -2.98914779]
+
 REST_LEFT_ARM = [2.13539289, 1.29629967, 3.74999698, -0.15000005, 10000., -0.10000004, 10000.]
 WIDE_LEFT_ARM = [1.5806603449288885, -0.14239066980481405, 1.4484623937179126, -1.4851759349218694, 1.3911839347271555,
                  -1.6531320011389408, -2.978586584568441]
@@ -117,6 +121,7 @@ def is_drake_pr2(robot):  # 87
 #     return [joint_from_name[name] for name in joint_names]
 
 #####################################
+
 
 def get_base_pose(pr2):
     return get_link_pose(pr2, link_from_name(pr2, PR2_BASE_LINK))
@@ -238,9 +243,11 @@ def set_gripper_position(robot, arm, position):
     set_joint_positions(robot, gripper_joints, [position] * len(gripper_joints))
 
 
-def open_arm(robot, arm):  # These are mirrored on the pr2
+def open_arm(robot, arm, e=1.):  # These are mirrored on the pr2
     for joint in get_gripper_joints(robot, arm):
-        set_joint_position(robot, joint, get_max_limit(robot, joint))
+        max_limit = get_max_limit(robot, joint)
+        min_limit = get_min_limit(robot, joint)
+        set_joint_position(robot, joint, e * (max_limit - min_limit) + min_limit)
 
 
 def close_arm(robot, arm):
@@ -310,6 +317,35 @@ def get_side_grasps(body, under=False, tool_pose=TOOL_POSE, body_pose=unit_pose(
                 rotate_z = Pose(euler=[i * math.pi, 0, 0])
                 grasps += [multiply(tool_pose, translate_z, rotate_z, swap_xz,
                                     translate_center, body_pose)]  # , np.array([l])
+    return grasps
+
+
+def get_side_grasps_hanoi(body, seed=None, tool_pose=TOOL_POSE, body_pose=unit_pose(),
+                          max_width=MAX_GRASP_WIDTH, grasp_length=GRASP_LENGTH, top_offset=SIDE_HEIGHT_OFFSET,
+                          arm=None):
+    # TODO: compute bounding box width wrt tool frame
+    # get the geometric center in body_pose frame, NOT world frame
+    center, (w, l, h) = approximate_as_prism(body, body_pose=body_pose)
+    translate_center = Pose(point=point_from_pose(body_pose) - center)
+    grasps = []
+    # x_offset = 0
+    x_offset = h / 2 - top_offset
+
+    if seed is None:
+        a = np.random.uniform(0, 1)
+    else:
+        a = np.array([seed]).flatten()[0]
+        assert 0 <= a <= 1
+    # a = 0.5
+
+    swap_xz = Pose(euler=[0, -math.pi / 2, 0])
+    # rotate_y = Pose(euler=[0, 2 * math.pi * a, 0])
+    translate_z = Pose(point=[x_offset, 0, l / 2 - grasp_length])
+    rotate_z = Pose(euler=[2. * math.pi * (a - 0.5), 0, 0])
+
+    grasps += [multiply(tool_pose, translate_z, rotate_z, swap_xz,
+                        translate_center, body_pose)]  # , np.array([w])
+
     return grasps
 
 

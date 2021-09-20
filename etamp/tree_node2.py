@@ -136,11 +136,9 @@ class Node(object):
         self.is_successful = self.is_leaf and not self.is_terminal
 
         self.saved_world = None  # for the root node, it is the initial environment state
-        if not self.is_terminal and not self.is_decision_node:
+        if not self.is_terminal:
             # if the world state is changed successfully, save it.
             self.saved_world = env.get_saved_world()
-
-        self.parent.children.append(self)
 
         update_constraint(self, env, digraph, sdg_msg)
 
@@ -173,7 +171,7 @@ class Node(object):
     def receive_visit(self, env):
         self.visits += 1
         if self.is_terminal:
-            self.value = 0.1 * self.step_terminal / env.op_length
+            self.value = 0.1 * self.depth / env.num_depth
         elif self.is_successful:
             self.value = 1 + self.get_acc_action_reward()
             print('PPS- A solution is found!')
@@ -192,6 +190,25 @@ class Node(object):
     def active_children(self):
         return [c for c in self.children if not c.is_final]
 
+    @property
+    def is_dead_end_T(self):
+        if self.is_decision_node:
+            return None
+        if len(self.children) < 1:
+            return False
+        if len(self.active_children) == 0:
+            return True
+        else:
+            return False
+
+    def is_dead_end_D(self):
+        if not self.is_decision_node:
+            return None
+        if not self.children:
+            return False
+        r = all([c.is_dead_end_T for c in self.children])
+        return r
+
     def get_acc_action_reward(self):
         """Accumulated reward up to current node."""
         acc_reward = 0
@@ -209,9 +226,13 @@ class Node(object):
             if node.parent.is_decision_node:
                 bp_value = max([c.value for c in node.parent.children])
             else:
-                nu = sum([c.value * c.visits for c in node.parent.children])
-                de = sum([c.visits for c in node.parent.children])
-                bp_value = nu / de
+                # nu = sum([c.value * c.visits for c in node.parent.children])
+                # de = sum([c.visits for c in node.parent.children])
+                # bp_value = nu / de
+                bp_value = max([c.value for c in node.parent.children])
+            if len(node.parent.children) > 1 and len(node.parent.active_children) == 0:
+                bp_value = -1
+
             node.parent.value = bp_value
             node = node.parent
 
@@ -283,18 +304,17 @@ class Node(object):
         return '{} - {}{}: {}'.format(self.depth, self.sn,
                                       ' - F' if self.is_final else '', self.pddl)
 
+    if __name__ == '__main__':
+        A = tuple([1, 2, 3, 4])
+        B = [A, A, A, A, A]
+        list_eff = [[atom for atom in a] for a in B]
+        list_eff = sum(list_eff, [])
+        print(list_eff)
 
-if __name__ == '__main__':
-    A = tuple([1, 2, 3, 4])
-    B = [A, A, A, A, A]
-    list_eff = [[atom for atom in a] for a in B]
-    list_eff = sum(list_eff, [])
-    print(list_eff)
+        d = {'a': 1, 'b': 2, 'c': 3, 'd': 4}
 
-    d = {'a': 1, 'b': 2, 'c': 3, 'd': 4}
+        for k, v in d.items():
+            print(k, v)
 
-    for k, v in d.items():
-        print(k, v)
-
-    for i in range(4, 20 + 1):
-        print(i)
+        for i in range(4, 20 + 1):
+            print(i)

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from run_branch_regrasp import *
 import os
+from collections import defaultdict
 
 
 #######################################################
@@ -9,8 +10,7 @@ def eTAMP_session():
     visualization = 1
     connect(use_gui=visualization)
 
-    PlanningScenario = get_scn(2)
-    scn = PlanningScenario()
+    scn = Scene_regrasp1()
 
     pddlstream_problem = get_pddlstream_problem(scn)
     _, _, _, _, stream_info, action_info = pddlstream_problem
@@ -25,13 +25,19 @@ def eTAMP_session():
     concrete_plan = None
     num_attempts = 0
     thinking_time = 0
-    while concrete_plan is None and thinking_time < 60 * 10:
+
+    """Any skeleton starting with some essenceJam will be prevented from motion planning until this essenceJam is broken through."""
+    sk_to_essenceJam = {}  # mapping from skeleton_id to its resultant essenceList
+
+    essenceJam_to_sks = defaultdict(set)
+
+    while concrete_plan is None and thinking_time < 300:
         # Progressive Widening
         e_root.visits += 1
         # alpha = 0.3
         # need_expansion = np.floor(e_root.visits ** alpha) > np.floor(
         #     (e_root.visits - 1) ** alpha)
-        flag_pw = e_root.visits > 9.5 * (len(e_root.children) ** 2)  # 8.5
+        flag_pw = e_root.visits > 6 * (len(e_root.children) ** 2)  # 8.5 6
         need_expansion = e_root.num_children < 1 or flag_pw
         need_expansion = need_expansion and (e_root.num_children < sk_batch.num_ap)
         # need_expansion = e_root.num_children < 1
@@ -45,16 +51,45 @@ def eTAMP_session():
             e_root.add_child(selected_branch)
         else:
             selected_branch = e_root.select_child_ucb()
-        concrete_plan = selected_branch.think(1, visualization)
+
+        delay_sk = None  # delay motion planning
+
+        for sk, essenceJam in sk_to_essenceJam.items():
+            if sk != selected_branch and selected_branch.test_essenceJam(essenceJam):
+                essenceJam_to_sks[essenceJam].add(selected_branch)
+                delay_sk = sk
+
+        if delay_sk is not None:
+            selected_branch.delay_call += 1
+            selected_branch = delay_sk
+
+        concrete_plan = selected_branch.think(1, 0)
+
+        if concrete_plan is None:
+            essenceJam = selected_branch.get_essenceJam()
+            old_essenceJam = tuple([])
+            if selected_branch in sk_to_essenceJam:
+                old_essenceJam = sk_to_essenceJam[selected_branch]
+            if len(essenceJam) > len(old_essenceJam):
+                to_remove = []
+                for sk in essenceJam_to_sks[old_essenceJam]:
+                    to_remove.append(sk)
+                    if not sk.test_essenceJam(essenceJam):
+                        sk.init_from_other(selected_branch, len(old_essenceJam) - 1)
+                for sk in to_remove:
+                    essenceJam_to_sks[old_essenceJam].remove(sk)
+
+            sk_to_essenceJam[selected_branch] = essenceJam
+
         # print('total_node: ', e_root.total_node)
         num_attempts += 1
         thinking_time = time.time() - st
 
-        if (e_root.visits + 1) % 10 == 0:
-            with open('ctype_to_constraints.pk', 'wb') as f:
-                pk.dump(Constraint.ctype_to_constraints, f)
-                for ctype, cs in Constraint.ctype_to_constraints.items():
-                    print(f"#{ctype}# {cs[0]}: {len([c for c in cs if c.yg <= 0])}-{len([c for c in cs if c.yg > 0])}")
+        # if (e_root.visits + 1) % 10 == 0:
+        #     with open('ctype_to_constraints.pk', 'wb') as f:
+        #         pk.dump(Constraint.ctype_to_constraints, f)
+        #         for ctype, cs in Constraint.ctype_to_constraints.items():
+        #             print(f"#{ctype}# {cs[0]}: {len([c for c in cs if c.yg <= 0])}-{len([c for c in cs if c.yg > 0])}")
 
     print('think time: ' + str(thinking_time))
     # e_root.save_the_tree(idx)
@@ -70,8 +105,6 @@ def eTAMP_session():
 
 
 if __name__ == '__main__':
-
-
 
     list_report_vnts = []
     for i in range(100):

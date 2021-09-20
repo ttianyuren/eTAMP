@@ -18,7 +18,7 @@ def remove_plan_folder():
     os.makedirs(plan_dir)
 
 
-def run_symk(domain_file='toy_domain.pddl', problem_file='toy_problem.pddl', plan_file='found_plans/sas_plan',
+def run_symk(domain_file='A_ap_domain.pddl', problem_file='A_ap_problem.pddl', plan_file='found_plans/sas_plan',
              num_plan=11):
     remove_plan_folder()
     args = arguments.parse_args([domain_file, problem_file,

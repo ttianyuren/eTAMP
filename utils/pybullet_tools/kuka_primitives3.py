@@ -535,7 +535,7 @@ class sdg_sample_grasp(object):
         list_grasp = []
         if direction == 0:
             """ee at +X of the ellipsoid_frame"""
-            swap_z = Pose(euler=[0, -np.pi / 2, 0])
+            swap_z = Pose(euler=[0, -np.pi / 2, 0])  # direct +z to -x
             # translate_point: choose from the grasping surface with 2 dof
             d1, d2 = 0., 0.  # [-0.5, 0.5]
             translate_point = Pose(point=[ex / 2, 0 + d1 * ey, ez / 2 + d2 * ez])
@@ -546,7 +546,7 @@ class sdg_sample_grasp(object):
 
         elif direction == 1:
             """ee at +Y"""
-            swap_z = Pose(euler=[np.pi / 2, 0, 0])
+            swap_z = Pose(euler=[np.pi / 2, 0, 0])  # direct +z to -y
             d1, d2 = 0., 0.  # [-0.5, 0.5]
             translate_point = Pose(point=[0 - d1 * ex, ey / 2, ez / 2 + d2 * ez])
             for j in range(2):
@@ -556,7 +556,7 @@ class sdg_sample_grasp(object):
 
         elif direction == 2:
             """ee at +Z"""
-            swap_z = Pose(euler=[0, np.pi, 0])
+            swap_z = Pose(euler=[0, np.pi, 0])  # direct +z to -z
             d1, d2 = 0., 0.  # [-0.5, 0.5]
             translate_point = Pose(point=[0 - d2 * ex, 0 + d1 * ey, ez])
             for j in range(4):
@@ -598,7 +598,7 @@ class sdg_sample_grasp(object):
 
 
 class sdg_ik_grasp(object):
-    def __init__(self, robot, all_bodies=[], teleport=False, num_attempts=50):
+    def __init__(self, robot, all_bodies=[], teleport=False, num_attempts=5):
         self.all_bodies = all_bodies
         self.teleport = teleport
         self.num_attempts = num_attempts

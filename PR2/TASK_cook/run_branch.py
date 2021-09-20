@@ -12,7 +12,7 @@ from etamp.stream import StreamInfo
 from utils.pybullet_tools.pr2_primitives import BodyPose, Conf, get_ik_ir_gen, get_motion_gen, \
     get_stable_gen, get_grasp_gen, Attach, Detach, Clean, Cook, control_commands, \
     get_gripper_joints, GripperCommand, apply_commands, State, Command, sdg_sample_place, \
-    sdg_sample_grasp, sdg_ik_grasp, sdg_motion_base_joint
+    sdg_sample_grasp, sdg_ir_ik_grasp, sdg_motion_base_joint
 from utils.pybullet_tools.pr2_utils import get_arm_joints, ARM_NAMES, get_group_joints, get_group_conf
 from utils.pybullet_tools.utils import WorldSaver, connect, get_pose, set_pose, get_configuration, is_placement, \
     disconnect, get_bodies, connect, get_pose, is_placement, point_from_pose, \
@@ -240,9 +240,9 @@ def get_pddlstream_problem(scn):
             )
 
     stream_info = {'sample-place': StreamInfo(seed_gen_fn=sdg_sample_place(scn), every_layer=15,
-                                             free_generator=True, discrete=False, p1=[1, 1, 1], p2=[.2, .2, .2]),
+                                              free_generator=True, discrete=False, p1=[1, 1, 1], p2=[.2, .2, .2]),
                    'sample-grasp': StreamInfo(seed_gen_fn=sdg_sample_grasp(scn)),
-                   'inverse-kinematics': StreamInfo(seed_gen_fn=sdg_ik_grasp(scn)),
+                   'inverse-kinematics': StreamInfo(seed_gen_fn=sdg_ir_ik_grasp(scn)),
                    'plan-base-motion': StreamInfo(seed_gen_fn=sdg_motion_base_joint(scn)),
                    }
 
@@ -256,7 +256,7 @@ def get_pddlstream_problem(scn):
 
 #######################################################
 
-def main():
+def main(new_problem=0):
     visualization = 1
     connect(use_gui=visualization)
 
@@ -270,7 +270,6 @@ def main():
 
     st = time.time()
 
-    new_problem = 1
     if new_problem:
         sk_batch = solve_progressive2(pddlstream_problem,
                                       num_optms_init=80, target_sk=1)
@@ -286,7 +285,7 @@ def main():
                                stream_info, scn)
     selected_branch = PlannerUCT(skeleton_env)
 
-    concrete_plan = selected_branch.think(900, False)
+    concrete_plan = selected_branch.think(300, 1)
 
     if concrete_plan is None:
         print('TAMP is failed.', concrete_plan)

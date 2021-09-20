@@ -17,7 +17,7 @@ from etamp.pddlstream.utils import read, INF, get_file_path, find_unique
 from etamp.p_uct2 import PlannerUCT
 from etamp.tree_node2 import ExtendedNode
 from etamp.env_sk_branch import SkeletonEnv
-from build_scenario import get_scn
+from build_scenario import get_scn, Scene_regrasp1
 
 from etamp.constraint_graph import Constraint
 
@@ -212,13 +212,12 @@ def get_pddlstream_problem(scn):
 
 #######################################################
 
-def main(display=True, teleport=False, use_bo=1, visualization=1, new_problem=1, alg_CP_BO=None):
+def main(display=True, teleport=False, use_bo=1, visualization=1, new_problem=0, alg_CP_BO=None):
     visual_UCT = 1
 
     connect(use_gui=visualization)
 
-    PlanningScenario = get_scn(2)
-    scn = PlanningScenario()
+    scn = Scene_regrasp1()
 
     saved_world = WorldSaver()
     # dump_world()
@@ -243,7 +242,7 @@ def main(display=True, teleport=False, use_bo=1, visualization=1, new_problem=1,
                                stream_info, scn, use_bo=use_bo)
     selected_branch = PlannerUCT(skeleton_env)
 
-    concrete_plan = selected_branch.think(200, visual_UCT)
+    concrete_plan = selected_branch.think(2000, visual_UCT)
 
     sk_visits = selected_branch.visits
 

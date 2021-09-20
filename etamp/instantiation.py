@@ -8,7 +8,6 @@ from .pddlstream.language.conversion import is_positive_evals, head_from_fact, f
 from .pddlstream.utils import safe_zip, HeapElement
 from .pddlstream.language.object import OptimisticObject
 
-
 # TODO: maybe store unit complexity here as well as a tiebreaker
 Priority = namedtuple('Priority', ['level', 'num'])  # num ensures FIFO
 
@@ -200,6 +199,9 @@ class Instantiator2(object):  # Dynamic Instantiator
         for combo in product(*domain_atoms):
             mapping = test_mapping2(domain, combo)
             if mapping is not None:
+                for it in stream.inputs:
+                    if it not in mapping:
+                        print()
                 input_objects = tuple(mapping[para] for para in stream.inputs)
                 instance = stream.get_instance(input_objects)
                 if self.test_instance(instance):

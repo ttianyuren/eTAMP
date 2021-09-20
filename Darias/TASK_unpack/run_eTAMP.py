@@ -8,7 +8,7 @@ def exp():
     visualization = 0
     connect(use_gui=visualization)
 
-    scn = PlanningScenario()
+    scn = Scene_unpack2()
 
     pddlstream_problem = get_pddlstream_problem(scn)
     _, _, _, _, stream_info, action_info = pddlstream_problem
@@ -23,7 +23,7 @@ def exp():
     concrete_plan = None
     num_attempts = 0
     thinking_time = 0
-    while concrete_plan is None and thinking_time < 60 * 20:
+    while concrete_plan is None and thinking_time < 300:
         # Progressive Widening
         e_root.visits += 1
         # alpha = 0.3
@@ -74,4 +74,4 @@ if __name__ == '__main__':
         data2 = [c[1] for c in list_report_vnts]
         data3 = [c[2] for c in list_report_vnts]
         data4 = [c[3] for c in list_report_vnts]
-        np.savetxt("result_vnts.csv", np.column_stack((data1, data2, data3, data4)), delimiter=",", fmt='%s')
+        np.savetxt("result_vnts_unpack2.csv", np.column_stack((data1, data2, data3, data4)), delimiter=",", fmt='%s')

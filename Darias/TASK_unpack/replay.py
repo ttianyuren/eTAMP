@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     connect(use_gui=True)
 
-    scn = PlanningScenario()
+    scn = Scene_unpack3()
     commands = postprocess_plan(scn, exe_plan)
 
     saved_world = WorldSaver()

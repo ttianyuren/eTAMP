@@ -1,23 +1,23 @@
-;15:16:14 26/08
+;18:47:22 07/09
 
-;Skeleton_SN = 11
+;Skeleton_SN = 46
 
 (define (problem put-wuti_propo)
    (:domain pick-and-place_propo)
 
    (:objects
-          q408 - config
+          q608 - config
           o10 o6 o7 o8 o9 - wuti
-          p128 p256 p480 - pose
-          _p0 _p1 _p2 _p3 _p4 _p5 _p6 _p7 _p8 _p9 - propo_action
+          p424 p608 p632 - pose
+          _p0 _p1 _p10 _p11 _p12 _p13 _p2 _p3 _p4 _p5 _p6 _p7 _p8 _p9 - propo_action
    )
 
    (:init
           (allowlocate)
-          (atconf q408)
-          (atpose o10 p480)
-          (atpose o8 p128)
-          (atpose o9 p256)
+          (atconf q608)
+          (atpose o10 p608)
+          (atpose o8 p632)
+          (atpose o9 p424)
           (canmove)
           (canpick)
           (fixed o6)
@@ -26,11 +26,11 @@
           (graspable o8)
           (graspable o9)
           (handempty)
-          (isconf q408)
-          (ispose o10 p480)
-          (ispose o8 p128)
-          (ispose o9 p256)
-          (issupport o10 p480 o6)
+          (isconf q608)
+          (ispose o10 p608)
+          (ispose o8 p632)
+          (ispose o9 p424)
+          (issupport o10 p608 o6)
           (stackable o10 o6)
           (stackable o10 o7)
           (stackable o8 o6)
@@ -41,7 +41,7 @@
    )
 
    (:goal
-        (_applicable _p9)
+        (_applicable _p13)
    )
 
 )

@@ -145,7 +145,7 @@ class StreamInfo(ExternalInfo):
         """parameters for UCT planner"""
         self.free_generator = free_generator
         if free_generator:
-            assert (discrete is not None) and (p1 is not None) and (p2 is not None)
+            assert (discrete is not None) and (p1 is not None)
         self.discrete = discrete
         self.p1 = p1  # continuous: weights            discrete: all choices
         self.p2 = p2  # continuous: exploration std    discrete: probabilities for each choice

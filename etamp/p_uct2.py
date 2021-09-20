@@ -115,10 +115,57 @@ def transform_patom_args(patom, mapping):
     return pAtom(name, args)
 
 
+def visualize_tree(edges, id_to_node):
+    graph = nx.Graph()
+    color_map = []
+    lable_map = {}
+
+    plt.rcParams["figure.figsize"] = (16, 8)
+    plt.clf()
+
+    for edge in edges:
+        graph.add_edge(*edge)
+
+    for node_id in graph:
+        node = id_to_node[node_id]
+
+        if node.is_successful:
+            color_map.append('yellowgreen')
+            # lable_map[node_id] = 'v {:.3f}\nn {:.2f}'.format(node.value, node.visits)
+        elif node.is_terminal:
+            color_map.append('mediumorchid')
+            # if node.decision is not None:
+            #     decision = np.array(node.decision)
+            #     lable_map[node_id] = 'd {}\nv {:.3f}\nn {:.2f}'.format(decision, node.value, node.visits)
+            # else:
+            #     lable_map[node_id] = 'v {:.3f}\nn {:.2f}'.format(node.value, node.visits)
+        elif not node.is_decision_node:
+            color_map.append('coral')
+            # decision = np.array(node.decision)
+            # np.set_printoptions(precision=2, suppress=True)
+            # lable_map[node_id] = 'd {}\nv {:.3f}\nn {:.2f}'.format(decision, node.value, node.visits)
+        else:
+            color_map.append('cornflowerblue')
+            # lable_map[node_id] = 'v {:.3f}\nn {:.2f}'.format(node.value, node.visits)
+
+        np.set_printoptions(precision=2, suppress=True)
+        if node.decision is not None:
+            decision = np.array(node.decision)
+            lable_map[node_id] = 'd {}\nv {:.3f}\nn {:.2f}'.format(decision, node.value, node.visits)
+        else:
+            lable_map[node_id] = 'v {:.3f}\nn {:.2f}'.format(node.value, node.visits)
+
+    dot_pos = graphviz_layout(graph, prog="dot")
+    nx.draw(graph, dot_pos, node_color=color_map, with_labels=False)
+    nx.draw_networkx_labels(graph, dot_pos, lable_map)
+    plt.draw()
+    plt.pause(0.001)
+
+
 class PlannerUCT(object):
     verbose = False
 
-    def __init__(self, skeleton_env, ucb_const=0.03, pw_const=0.5):  # 0.03 0.5
+    def __init__(self, skeleton_env, ucb_const=0.1, pw_const=13.5):  # 0.03 0.5 0.1
 
         self.root_node = None
         self.num_playout = None
@@ -133,15 +180,22 @@ class PlannerUCT(object):
         self.time_comsuption = None
 
         self.num_call = 0
+        self.delay_call = 0
+
+        self.id_to_node = {}
 
     @property
     def value(self):
-        assert self.root_node is not None
+        if self.root_node is None:
+            return 0
+        # assert self.root_node is not None
         return self.root_node.value
 
     @property
     def visits(self):
-        assert self.root_node is not None
+        if self.root_node is None:
+            return self.delay_call
+        # assert self.root_node is not None
         return self.root_node.visits
 
     @property
@@ -156,7 +210,6 @@ class PlannerUCT(object):
     def reset(self):
 
         if self.num_call == 0:
-            self.id_to_node = {}
             self.edges = []
             # root_state = self.env.get_root_state()
             self.root_node = Node(0, None, self.env)
@@ -167,11 +220,8 @@ class PlannerUCT(object):
         self.num_call += 1
 
     def save_nodes(self):
-        save_dict = {}
-        for id, node in self.id_to_node.items():
-            save_dict[id] = node
         with open('tree_nodes.pk', 'wb') as f:
-            pk.dump(save_dict, f)
+            pk.dump((self.edges, self.id_to_node), f)
 
     def update_graph(self, cur_node, next_node):
         self.id_to_node[next_node.id] = next_node
@@ -193,30 +243,47 @@ class PlannerUCT(object):
 
         if cur_node.is_decision_node:
             """Decision Node"""
-            flag_pw = cur_node.visits > 0.3 * (len(cur_node.children) ** 2)  # 0.5
-            if (flag_pw or (not cur_node.active_children)) and cur_node.is_expandable:
+            # pw_const = self.pw_const * max((1 - cur_node.depth / self.env.num_depth) ** 2, 0.1)
+            # if cur_node.is_discrete:
+            #     pw_const = 0.5 * self.pw_const
+            pw_const = self.pw_const
+
+            flag_pw = cur_node.visits > pw_const * (len(cur_node.children) ** 2)  # 0.5
+
+            no_active_children = not cur_node.active_children
+            if (flag_pw or no_active_children or cur_node.is_dead_end_D()) and cur_node.is_expandable:
                 """Update the environment state before making new decision"""
                 next_node = Node(cur_node.depth + 1, cur_node, self.env)
+                cur_node.children.append(next_node)
                 self.update_graph(cur_node, next_node)
                 self.list_decision_temp.append((cur_node.depth, next_node.decision, 'new'))
                 self.depth_to_decision_temp[cur_node.depth] = next_node.decision
+                # if no_active_children:
+                #     self.pw_const = self.pw_const * 0.9
+
+                # if cur_node.is_dead_end_D():
+                #     print('+++++++++++++++ cur_node.is_dead_end_D() ', cur_node.pddl)
+                # if no_active_children:
+                #     print('+++++++++++++++ no_active_children ', cur_node.pddl)
+
             else:
                 suggestion = None
                 if self.env.use_bo:
                     suggestion = self.env.get_suggestion_CP_BO(cur_node)
                     print(f"SELECT---suggest {cur_node.depth}: {suggestion}")
-                next_node = cur_node.select_child_ucb(ucb_const=0.04, suggestion=suggestion)  # 0.02
+                next_node = cur_node.select_child_ucb(ucb_const=self.ucb_const, suggestion=suggestion)  # 0.02
                 self.list_decision_temp.append((cur_node.depth, next_node.decision, 'old'))
                 self.depth_to_decision_temp[cur_node.depth] = next_node.decision
         else:
             """Transition Node"""
             flag_pw = cur_node.visits > 5.5 * (len(cur_node.children) ** 2)  # 5.5
-            if flag_pw or (not cur_node.active_children):
+            flag_pw = False
+            if flag_pw or len(cur_node.active_children) < 1:
                 next_node = Node(cur_node.depth + 1, cur_node, self.env)
+                cur_node.children.append(next_node)
                 self.update_graph(cur_node, next_node)
             else:
                 next_node = cur_node.select_child_least()
-                # next_node = cur_node.select_child_ucb(ucb_const=0.02)
 
         self.play_simulation(next_node)
 
@@ -238,6 +305,98 @@ class PlannerUCT(object):
         best_idx = np.argmax(all_idxes)
         return all_nodes[best_idx]
 
+    def get_essenceJam(self):
+        all_nodes = list(self.id_to_node.values())
+        all_idxes = [n.depth for n in all_nodes]
+        deepest_idx = np.argmax(all_idxes)
+        deepest_node = all_nodes[deepest_idx]
+        if deepest_node.step_terminal is None:
+            return None
+        essenceJam = []
+        for op in self.env.op_plan[:deepest_node.step_terminal]:
+            essenceJam.append(op.essence)
+
+        return tuple(essenceJam)
+
+    def get_actionEssenceJam(self):
+        all_nodes = list(self.id_to_node.values())
+        all_idxes = [n.depth for n in all_nodes]
+        deepest_idx = np.argmax(all_idxes)
+        deepest_node = all_nodes[deepest_idx]
+        if deepest_node.step_terminal is None:
+            return None
+        actionEssenceJam = []
+        deepest_node = deepest_node.parent
+        list_action = []
+        for op in self.env.op_plan:
+            if isinstance(op, EXE_Action):
+                list_action.append(op.essence)
+
+        for op in self.env.op_plan[:deepest_node.steps[-1]]:
+            if isinstance(op, EXE_Action):
+                actionEssenceJam.append(op.essence)
+
+        final_idx = len(actionEssenceJam) - 1
+        # assert final_idx >= 0
+        if not final_idx >= 0:
+            return ()
+
+        if len(actionEssenceJam) < len(list_action):
+            if actionEssenceJam[final_idx][0] in ['move_free', 'move_holding', 'move_base'] and \
+                    list_action[final_idx + 1][0] in ["place", "pick"]:
+                actionEssenceJam.append(list_action[final_idx + 1])
+
+        return tuple(actionEssenceJam)
+
+    def test_essenceJam(self, essenceJam):
+        """To test if this branch complies with the essenceJam"""
+
+        if len(essenceJam) > len(self.env.op_plan):
+            return False
+
+        list_essence = [op.essence for op in self.env.op_plan]
+        for i, essence in enumerate(essenceJam):
+            if essence != list_essence[i]:
+                return False
+
+        return True
+
+    def init_from_other(self, branch0, step):
+
+        if self.num_call == 0:
+            best_node0 = branch0.get_best_node()
+            assert max(best_node0.steps) > step
+            while min(best_node0.steps) > step:
+                best_node0 = best_node0.parent
+            viable_trace = []
+            node = best_node0
+            while not node.is_root:
+                new_node = deepcopy(node)
+                new_node.visits = 1
+                viable_trace.append(new_node)
+                node = node.parent
+
+            new_node = deepcopy(node)
+            new_node.visits = 1
+            viable_trace.append(new_node)
+
+            viable_trace.reverse()
+
+            for i in range(len(viable_trace) - 1):
+                viable_trace[i].children = [viable_trace[i + 1]]
+                viable_trace[i + 1].parent = viable_trace[i]
+                viable_trace[i + 1].children = []
+
+            self.root_node = viable_trace[0]
+            self.root_node.visits = 1
+            self.root_node.parent = None
+
+            self.id_to_node[self.root_node.id] = self.root_node
+
+            return
+
+        return
+
     def think(self, num_playout=50, show_tree_nodes=True):
         self.reset()
         sd = np.random.randint(0, 1000, 1)[0]
@@ -258,7 +417,7 @@ class PlannerUCT(object):
             # print('dict_Size: ', asizeof(self.id_to_node))
             self.env.xy_data_raw.append((self.depth_to_decision_temp, self.reward_temp))
             if i < 1000 and show_tree_nodes:
-                self.visualization()
+                visualize_tree(self.edges, self.id_to_node)
             print(f'===decisions {self.list_decision_temp}')
             print(
                 'SK-{}, visits {}, value {:.3f}, nodes {}, playout {}/{}, max_depth {}/{}, p_stream {}'.format(
@@ -273,7 +432,7 @@ class PlannerUCT(object):
                 thinking_time = time.time() - st
                 # print('  Binding think_time: ', thinking_time)
                 if i < 1000 and show_tree_nodes:
-                    self.visualization()
+                    visualize_tree(self.edges, self.id_to_node)
                 self.save_nodes()
                 self.report_vnt = (self.visits, self.total_node, thinking_time)
                 return self.give_best_plan()
@@ -281,55 +440,18 @@ class PlannerUCT(object):
         thinking_time = time.time() - st
         # print('Binding think_time: ', thinking_time)
         if num_playout < 1000 and show_tree_nodes:
-            self.visualization()
+            visualize_tree(self.edges, self.id_to_node)
         self.save_nodes()
 
         return self.give_best_plan()
 
-    def visualization(self):
-        graph = nx.Graph()
-        color_map = []
-        lable_map = {}
-
-        plt.rcParams["figure.figsize"] = (16, 8)
-        plt.clf()
-
-        for edge in self.edges:
-            graph.add_edge(*edge)
-
-        for node_id in graph:
-            node = self.id_to_node[node_id]
-
-            if node.is_successful:
-                color_map.append('yellowgreen')
-                lable_map[node_id] = 'v {:.3f}\nn {:.2f}'.format(node.value, node.visits)
-            elif node.is_terminal:
-                color_map.append('mediumorchid')
-                if node.decision is not None:
-                    decision = np.array(node.decision)
-                    lable_map[node_id] = 'd {}\nv {:.3f}\nn {:.2f}'.format(decision, node.value, node.visits)
-                else:
-                    lable_map[node_id] = 'v {:.3f}\nn {:.2f}'.format(node.value, node.visits)
-            elif not node.is_decision_node:
-                color_map.append('coral')
-                decision = np.array(node.decision)
-                np.set_printoptions(precision=2, suppress=True)
-                lable_map[node_id] = 'd {}\nv {:.3f}\nn {:.2f}'.format(decision, node.value, node.visits)
-            else:
-                color_map.append('cornflowerblue')
-                lable_map[node_id] = 'v {:.3f}\nn {:.2f}'.format(node.value, node.visits)
-
-        dot_pos = graphviz_layout(graph, prog="dot")
-        nx.draw(graph, dot_pos, node_color=color_map, with_labels=False)
-        nx.draw_networkx_labels(graph, dot_pos, lable_map)
-        plt.draw()
-        plt.pause(0.001)
-
     def __repr__(self):
-        return '{}, visit {}, {}/{}, {}'.format(self.env.skeleton_id, self.num_call,
-                                                self.get_best_node().depth + 1,
-                                                self.env.num_depth,
-                                                self.env.get_problematic_streams[0])
+        # return '{}, visit {}, {}/{}, {}'.format(self.env.skeleton_id, self.num_call,
+        #                                         self.get_best_node().depth + 1,
+        #                                         self.env.num_depth,
+        #                                         self.env.get_problematic_streams[0])
+
+        return '{}'.format(self.env.skeleton_id)
 
 
 if __name__ == '__main__':
