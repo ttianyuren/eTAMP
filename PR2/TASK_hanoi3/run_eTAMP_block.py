@@ -37,7 +37,7 @@ def eTAMP_session():
 
     queue_candidate_sk = list(range(sk_batch.num_ap))
 
-    while concrete_plan is None and thinking_time < 500:
+    while concrete_plan is None and thinking_time < 300:
         e_root.visits += 1
         # Progressive Widening
         # alpha = 0.3
@@ -79,7 +79,7 @@ def eTAMP_session():
                 skeleton_env = SkeletonEnv(sk_id, op_plan,
                                            get_update_env_reward_fn(scn, action_info),
                                            stream_info, scn, use_bo=False)
-                cur_branch = PlannerUCT(skeleton_env, pw_const=5, ucb_const=0.001)
+                cur_branch = PlannerUCT(skeleton_env)  # pw_const=5, ucb_const=0.001
                 id_to_branch[sk_id] = cur_branch
                 e_root.add_child(cur_branch)
             else:
