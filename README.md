@@ -12,18 +12,15 @@ $ ./symk/build.py
 
 ## Examples
 
-### Extended tree search with PW-UCT (with visualization)
+### Kitchen domain
 
-* Darias/TASK_regrasp/run_branch_regrasp.py
 
-### Evaluate eTAMP on the Regrasp task
+### HanoiTower domain
 
-* Darias/TASK_regrasp/runExp_eTAMP.py
 
-### Evaluate CP-BO on the Regrasp task
+### Unpacking domain
 
-* Darias/TASK_regrasp/runExp_CP-BO.py
 
-### Evaluate CP-BO-Transfer on the Regrasp task
+### Regrasping domain
 
-* Darias/TASK_regrasp/runExp_CP-BO-Transfer.py
+
