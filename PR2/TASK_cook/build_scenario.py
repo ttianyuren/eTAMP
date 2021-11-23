@@ -74,7 +74,10 @@ class PlanningScenario(object):
                 # set_point(self.bd_body['box8'], (self.pos_table[0] - 0.0, self.pos_table[1] + 0.12, self.h + .1 / 2))
                 # set_point(self.bd_body['box9'], (self.pos_table[0] + 0.12, self.pos_table[1] + 0.12, self.h + .1 / 2))
 
-                set_camera(75, -45, 2.7, Point())
+                set_camera(75, -90, 1.1, Point(x=0., y=-0.95))
+
+                # set_camera(75, -70, 2.3, Point(x=0., y=-0.))
+
 
             # set_pose(box1, Pose(Point(x=0.25, y=0.80, z=stable_z(box1, region2))))
 

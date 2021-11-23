@@ -3,7 +3,6 @@ from run_branch import *
 import os
 from etamp.block_skeleton import *
 
-
 #######################################################
 
 
@@ -11,7 +10,7 @@ def eTAMP_session():
     visualization = 0
     connect(use_gui=visualization)
 
-    scn = Scene_unpack3()
+    scn = Scene_unpack2()  # Scene_unpack3()
 
     pddlstream_problem = get_pddlstream_problem(scn)
     _, _, _, _, stream_info, action_info = pddlstream_problem

@@ -91,7 +91,10 @@ class Scene_hanoi(object):
                 # set_point(self.bd_body['disc2'], (p2[0], p2[1], 0.775))
                 # set_point(self.bd_body['disc3'], (p1[0], p1[1], 0.775))
 
-                set_camera(75, -45, 2.7, Point())
+                set_camera(75, -55, 1.8, Point(y=0.2))
+
+                # set_camera(75, -90, 1.5, Point(x=0.6))
+
 
             # set_pose(box1, Pose(Point(x=0.25, y=0.80, z=stable_z(box1, region2))))
 
