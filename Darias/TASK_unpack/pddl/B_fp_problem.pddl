@@ -1,4 +1,4 @@
-;10:48:25 22/09
+;10:00:46 21/02
 
 ;Skeleton_SN = 4
 
@@ -6,17 +6,17 @@
    (:domain pick-and-place_propo)
 
    (:objects
-          q96 - config
+          q344 - config
           o6 o7 o8 o9 - wuti
-          p624 p832 - pose
+          p208 p40 - pose
           _p0 _p1 _p2 _p3 _p4 _p5 _p6 _p7 _p8 _p9 - propo_action
    )
 
    (:init
           (allowlocate)
-          (atconf q96)
-          (atpose o8 p624)
-          (atpose o9 p832)
+          (atconf q344)
+          (atpose o8 p40)
+          (atpose o9 p208)
           (canmove)
           (canpick)
           (fixed o6)
@@ -24,9 +24,9 @@
           (graspable o8)
           (graspable o9)
           (handempty)
-          (isconf q96)
-          (ispose o8 p624)
-          (ispose o9 p832)
+          (isconf q344)
+          (ispose o8 p40)
+          (ispose o9 p208)
           (stackable o8 o6)
           (stackable o8 o7)
           (stackable o9 o6)

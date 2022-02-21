@@ -7,7 +7,7 @@ from etamp.block_skeleton import *
 
 
 def eTAMP_session():
-    visualization = 0
+    visualization = 1
     connect(use_gui=visualization)
 
     scn = Scene_unpack2()  # Scene_unpack3()

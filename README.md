@@ -13,14 +13,17 @@
 ## Examples
 
 ### Kitchen domain
-
+![](results/cooking_5.gif)
 
 ### HanoiTower domain
-
+![](results/hanoiTower.gif)
+![](results/hanoiTower_2.gif)
 
 ### Unpacking domain
-
+![](results/unpack_c2.gif)
+![](results/unpack_c3.gif)
 
 ### Regrasping domain
+![](results/regrasp3.gif)
 
 
