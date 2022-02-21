@@ -10,27 +10,6 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="/Darias/TASK_regrasp/result_vnts.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/Darias/TASK_unpack/result_vnts.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/Darias/TASK_unpack/result_vnts_unpack2.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
         <entry key="/PR2/TASK_cook/result_vnts.csv">
           <value>
             <Attribute>

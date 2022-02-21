@@ -7,7 +7,7 @@
 
 ### Compiling the Top-k Planner
 ```console
-$ ./symk/build.py
+.../eTAMP$ ./symk/build.py
 ```
 
 ## Examples
