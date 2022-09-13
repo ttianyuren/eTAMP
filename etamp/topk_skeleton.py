@@ -655,16 +655,14 @@ def reorder_domain_problem(propo_domain, propo_problem, stream_names, action_nam
 
 
 def run_pddl_planner(nt_domain, nt_problem, target_result_num, result_dir_name,
-                     pddl_file_prefix='', pddl_comment=''):
+                     pddl_file_prefix='', pddl_comment='', path_task=''):
     if os.path.isdir(result_dir_name):
         shutil.rmtree(result_dir_name)
     os.mkdir(result_dir_name)
 
-    cur_dir = os.getcwd()
-
-    domain_path = cur_dir + '/' + PDDL_DIR + '/' + pddl_file_prefix + '_domain.pddl'
-    problem_path = cur_dir + '/' + PDDL_DIR + '/' + pddl_file_prefix + '_problem.pddl'
-    result_path = cur_dir + '/' + result_dir_name + '/' + pddl_file_prefix + '_sas'
+    domain_path = path_task + '/' + PDDL_DIR + '/' + pddl_file_prefix + '_domain.pddl'
+    problem_path = path_task + '/' + PDDL_DIR + '/' + pddl_file_prefix + '_problem.pddl'
+    result_path = path_task + '/' + result_dir_name + '/' + pddl_file_prefix + '_sas'
 
     dump_domain(nt_domain, domain_path, pddl_comment)
     dump_problem(nt_problem, problem_path, pddl_comment)
@@ -672,7 +670,7 @@ def run_pddl_planner(nt_domain, nt_problem, target_result_num, result_dir_name,
     with HideOutput():
         run_symk(domain_path, problem_path, result_path, num_plan=target_result_num)
 
-    result_files = [cur_dir + '/' + result_dir_name + '/' + file
+    result_files = [path_task + '/' + result_dir_name + '/' + file
                     for file in os.listdir(result_dir_name)]
     list_id = [int(file.split('.')[1]) for file in result_files]
     list_files = []
@@ -1015,10 +1013,12 @@ class TopkSkeleton(object):
 
         num_raw_last = 0
 
+        self.path_task_folder = os.path.dirname(os.path.dirname(original_domain_file))
+
         for i in range(50):
             """Raw solutions"""
             raw_solutions = run_pddl_planner(self.original_domain, self.optms_problem, num_raw_target, 'A_actionPlans',
-                                             'A_ap', '')
+                                             'A_ap', '', path_task=self.path_task_folder)
             num_solution = len(raw_solutions)
             if num_solution < target_num or num_solution == num_raw_last:
                 print(f'Failed: in creating ap_files. {num_solution} raw_solutions are found.')
@@ -1060,7 +1060,7 @@ class TopkSkeleton(object):
                                                                      self.stream_file)
 
         fp_files = run_pddl_planner(fp_domain, fp_problem, 1, 'B_fullPlans',
-                                    'B_fp', 'Skeleton_SN = ' + str(pointer))
+                                    'B_fp', 'Skeleton_SN = ' + str(pointer), path_task=self.path_task_folder)
         if not fp_files:
             print('Failed: in creating fp_files. ap_file = ' + ap_file)
             return None
@@ -1075,7 +1075,7 @@ class TopkSkeleton(object):
         op_domain, op_problem = reorder_domain_problem(copy(fp_domain), copy(fp_problem), full_list_stream,
                                                        full_list_action)
         op_files = run_pddl_planner(op_domain, op_problem, 1, 'C_operatorPlans',
-                                    'C_op', 'Skeleton_SN = ' + str(pointer))
+                                    'C_op', 'Skeleton_SN = ' + str(pointer), path_task=self.path_task_folder)
         if not fp_files:
             print('Failed: in creating op_files.')
             return None

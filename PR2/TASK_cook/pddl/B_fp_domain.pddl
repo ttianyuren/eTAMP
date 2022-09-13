@@ -1,4 +1,4 @@
-;09:54:52 10/09
+;15:10:38 13/09
 
 ;Skeleton_SN = 0
 
@@ -50,14 +50,14 @@
    )
 
    (:action a0_move_base
-          :parameters (q104 #q1 #t18)
-          :precondition (and (basemotion q104 #t18 #q1) (atbconf q104) (canmove) (_applicable _p0))
-          :effect (and (atbconf #q1) (not (atbconf q104)) (not (canmove)) (increase (total-cost) 200) (not (canoperate)) (not (_applicable _p0)) (_applicable _p1))
+          :parameters (q976 #q1 #t18)
+          :precondition (and (basemotion q976 #t18 #q1) (atbconf q976) (canmove) (_applicable _p0))
+          :effect (and (atbconf #q1) (not (atbconf q976)) (not (canmove)) (increase (total-cost) 200) (not (canoperate)) (not (_applicable _p0)) (_applicable _p1))
    )
    (:action a1_pick
-          :parameters ('left' o6 p176 #g1 #q1 #t2)
-          :precondition (and (kin 'left' o6 p176 #g1 #q1 #t2) (atpose o6 p176) (handempty 'left') (atbconf #q1) (_applicable _p1))
-          :effect (and (atgrasp 'left' o6 #g1) (canmove) (not (atpose o6 p176)) (not (handempty 'left')) (increase (total-cost) 100) (not (canoperate)) (not (_applicable _p1)) (_applicable _p2))
+          :parameters ('left' o6 p504 #g1 #q1 #t2)
+          :precondition (and (kin 'left' o6 p504 #g1 #q1 #t2) (atpose o6 p504) (handempty 'left') (atbconf #q1) (_applicable _p1))
+          :effect (and (atgrasp 'left' o6 #g1) (canmove) (not (atpose o6 p504)) (not (handempty 'left')) (increase (total-cost) 100) (not (canoperate)) (not (_applicable _p1)) (_applicable _p2))
    )
    (:action a2_move_base
           :parameters (#q1 #q8 #t59)
@@ -100,9 +100,9 @@
           :effect (and (atbconf #q3) (not (atbconf #q9)) (not (canmove)) (increase (total-cost) 200) (not (canoperate)) (not (_applicable _p9)) (_applicable _p10))
    )
    (:action a10_pick
-          :parameters ('left' o8 p232 #g3 #q3 #t4)
-          :precondition (and (kin 'left' o8 p232 #g3 #q3 #t4) (atpose o8 p232) (handempty 'left') (atbconf #q3) (_applicable _p10))
-          :effect (and (atgrasp 'left' o8 #g3) (canmove) (not (atpose o8 p232)) (not (handempty 'left')) (increase (total-cost) 100) (not (canoperate)) (not (_applicable _p10)) (_applicable _p11))
+          :parameters ('left' o8 p840 #g3 #q3 #t4)
+          :precondition (and (kin 'left' o8 p840 #g3 #q3 #t4) (atpose o8 p840) (handempty 'left') (atbconf #q3) (_applicable _p10))
+          :effect (and (atgrasp 'left' o8 #g3) (canmove) (not (atpose o8 p840)) (not (handempty 'left')) (increase (total-cost) 100) (not (canoperate)) (not (_applicable _p10)) (_applicable _p11))
    )
    (:action a11_move_base
           :parameters (#q3 #q14 #t99)
@@ -145,9 +145,9 @@
           :effect (and (atbconf #q2) (not (atbconf #q15)) (not (canmove)) (increase (total-cost) 200) (not (canoperate)) (not (_applicable _p18)) (_applicable _p19))
    )
    (:action a19_pick
-          :parameters ('left' o7 p64 #g2 #q2 #t3)
-          :precondition (and (kin 'left' o7 p64 #g2 #q2 #t3) (atpose o7 p64) (handempty 'left') (atbconf #q2) (_applicable _p19))
-          :effect (and (atgrasp 'left' o7 #g2) (canmove) (not (atpose o7 p64)) (not (handempty 'left')) (increase (total-cost) 100) (not (canoperate)) (not (_applicable _p19)) (_applicable _p20))
+          :parameters ('left' o7 p744 #g2 #q2 #t3)
+          :precondition (and (kin 'left' o7 p744 #g2 #q2 #t3) (atpose o7 p744) (handempty 'left') (atbconf #q2) (_applicable _p19))
+          :effect (and (atgrasp 'left' o7 #g2) (canmove) (not (atpose o7 p744)) (not (handempty 'left')) (increase (total-cost) 100) (not (canoperate)) (not (_applicable _p19)) (_applicable _p20))
    )
    (:action a20_move_base
           :parameters (#q2 #q11 #t79)
@@ -190,9 +190,9 @@
           :effect (and (atbconf #q0) (not (atbconf #q12)) (not (canmove)) (increase (total-cost) 200) (not (canoperate)) (not (_applicable _p27)) (_applicable _p28))
    )
    (:action a28_pick
-          :parameters ('left' o5 p8 #g0 #q0 #t1)
-          :precondition (and (kin 'left' o5 p8 #g0 #q0 #t1) (atpose o5 p8) (handempty 'left') (atbconf #q0) (_applicable _p28))
-          :effect (and (atgrasp 'left' o5 #g0) (canmove) (not (atpose o5 p8)) (not (handempty 'left')) (increase (total-cost) 100) (not (canoperate)) (not (_applicable _p28)) (_applicable _p29))
+          :parameters ('left' o5 p408 #g0 #q0 #t1)
+          :precondition (and (kin 'left' o5 p408 #g0 #q0 #t1) (atpose o5 p408) (handempty 'left') (atbconf #q0) (_applicable _p28))
+          :effect (and (atgrasp 'left' o5 #g0) (canmove) (not (atpose o5 p408)) (not (handempty 'left')) (increase (total-cost) 100) (not (canoperate)) (not (_applicable _p28)) (_applicable _p29))
    )
    (:action a29_move_base
           :parameters (#q0 #q5 #t39)
@@ -230,9 +230,9 @@
           :effect (and (cooked o5) (not (cleaned o5)) (increase (total-cost) 50) (not (canoperate)) (not (_applicable _p35)) (_applicable _p36))
    )
    (:action a36_move_base
-          :parameters (#q6 q104 #t135)
-          :precondition (and (basemotion #q6 #t135 q104) (atbconf #q6) (canmove) (_applicable _p36))
-          :effect (and (atbconf q104) (not (atbconf #q6)) (not (canmove)) (increase (total-cost) 200) (not (canoperate)) (not (_applicable _p36)) (_applicable _p37))
+          :parameters (#q6 q976 #t135)
+          :precondition (and (basemotion #q6 #t135 q976) (atbconf #q6) (canmove) (_applicable _p36))
+          :effect (and (atbconf q976) (not (atbconf #q6)) (not (canmove)) (increase (total-cost) 200) (not (canoperate)) (not (_applicable _p36)) (_applicable _p37))
    )
    (:action s0_sample-place
           :parameters (o5 o2)
@@ -315,29 +315,29 @@
           :effect (isgrasp o8 #g3)
    )
    (:action s16_plan-base-motion
-          :parameters (q104 q104)
-          :precondition (and (isbconf q104) (isbconf q104))
-          :effect (basemotion q104 #t0 q104)
+          :parameters (q976 q976)
+          :precondition (and (isbconf q976) (isbconf q976))
+          :effect (basemotion q976 #t0 q976)
    )
    (:action s17_inverse-kinematics
-          :parameters ('left' o5 p8 #g0)
-          :precondition (and (controllable 'left') (ispose o5 p8) (isgrasp o5 #g0))
-          :effect (and (isbconf #q0) (kin 'left' o5 p8 #g0 #q0 #t1))
+          :parameters ('left' o5 p408 #g0)
+          :precondition (and (controllable 'left') (ispose o5 p408) (isgrasp o5 #g0))
+          :effect (and (isbconf #q0) (kin 'left' o5 p408 #g0 #q0 #t1))
    )
    (:action s18_inverse-kinematics
-          :parameters ('left' o6 p176 #g1)
-          :precondition (and (controllable 'left') (ispose o6 p176) (isgrasp o6 #g1))
-          :effect (and (isbconf #q1) (kin 'left' o6 p176 #g1 #q1 #t2))
+          :parameters ('left' o6 p504 #g1)
+          :precondition (and (controllable 'left') (ispose o6 p504) (isgrasp o6 #g1))
+          :effect (and (isbconf #q1) (kin 'left' o6 p504 #g1 #q1 #t2))
    )
    (:action s19_inverse-kinematics
-          :parameters ('left' o7 p64 #g2)
-          :precondition (and (controllable 'left') (ispose o7 p64) (isgrasp o7 #g2))
-          :effect (and (isbconf #q2) (kin 'left' o7 p64 #g2 #q2 #t3))
+          :parameters ('left' o7 p744 #g2)
+          :precondition (and (controllable 'left') (ispose o7 p744) (isgrasp o7 #g2))
+          :effect (and (isbconf #q2) (kin 'left' o7 p744 #g2 #q2 #t3))
    )
    (:action s20_inverse-kinematics
-          :parameters ('left' o8 p232 #g3)
-          :precondition (and (controllable 'left') (ispose o8 p232) (isgrasp o8 #g3))
-          :effect (and (isbconf #q3) (kin 'left' o8 p232 #g3 #q3 #t4))
+          :parameters ('left' o8 p840 #g3)
+          :precondition (and (controllable 'left') (ispose o8 p840) (isgrasp o8 #g3))
+          :effect (and (isbconf #q3) (kin 'left' o8 p840 #g3 #q3 #t4))
    )
    (:action s21_inverse-kinematics
           :parameters ('left' o5 #p0 #g0)
@@ -400,89 +400,89 @@
           :effect (and (isbconf #q15) (kin 'left' o8 #p11 #g3 #q15 #t16))
    )
    (:action s33_plan-base-motion
-          :parameters (q104 #q0)
-          :precondition (and (isbconf q104) (isbconf #q0))
-          :effect (basemotion q104 #t17 #q0)
+          :parameters (q976 #q0)
+          :precondition (and (isbconf q976) (isbconf #q0))
+          :effect (basemotion q976 #t17 #q0)
    )
    (:action s34_plan-base-motion
-          :parameters (q104 #q1)
-          :precondition (and (isbconf q104) (isbconf #q1))
-          :effect (basemotion q104 #t18 #q1)
+          :parameters (q976 #q1)
+          :precondition (and (isbconf q976) (isbconf #q1))
+          :effect (basemotion q976 #t18 #q1)
    )
    (:action s35_plan-base-motion
-          :parameters (q104 #q2)
-          :precondition (and (isbconf q104) (isbconf #q2))
-          :effect (basemotion q104 #t19 #q2)
+          :parameters (q976 #q2)
+          :precondition (and (isbconf q976) (isbconf #q2))
+          :effect (basemotion q976 #t19 #q2)
    )
    (:action s36_plan-base-motion
-          :parameters (q104 #q3)
-          :precondition (and (isbconf q104) (isbconf #q3))
-          :effect (basemotion q104 #t20 #q3)
+          :parameters (q976 #q3)
+          :precondition (and (isbconf q976) (isbconf #q3))
+          :effect (basemotion q976 #t20 #q3)
    )
    (:action s37_plan-base-motion
-          :parameters (q104 #q4)
-          :precondition (and (isbconf q104) (isbconf #q4))
-          :effect (basemotion q104 #t21 #q4)
+          :parameters (q976 #q4)
+          :precondition (and (isbconf q976) (isbconf #q4))
+          :effect (basemotion q976 #t21 #q4)
    )
    (:action s38_plan-base-motion
-          :parameters (q104 #q5)
-          :precondition (and (isbconf q104) (isbconf #q5))
-          :effect (basemotion q104 #t22 #q5)
+          :parameters (q976 #q5)
+          :precondition (and (isbconf q976) (isbconf #q5))
+          :effect (basemotion q976 #t22 #q5)
    )
    (:action s39_plan-base-motion
-          :parameters (q104 #q6)
-          :precondition (and (isbconf q104) (isbconf #q6))
-          :effect (basemotion q104 #t23 #q6)
+          :parameters (q976 #q6)
+          :precondition (and (isbconf q976) (isbconf #q6))
+          :effect (basemotion q976 #t23 #q6)
    )
    (:action s40_plan-base-motion
-          :parameters (q104 #q7)
-          :precondition (and (isbconf q104) (isbconf #q7))
-          :effect (basemotion q104 #t24 #q7)
+          :parameters (q976 #q7)
+          :precondition (and (isbconf q976) (isbconf #q7))
+          :effect (basemotion q976 #t24 #q7)
    )
    (:action s41_plan-base-motion
-          :parameters (q104 #q8)
-          :precondition (and (isbconf q104) (isbconf #q8))
-          :effect (basemotion q104 #t25 #q8)
+          :parameters (q976 #q8)
+          :precondition (and (isbconf q976) (isbconf #q8))
+          :effect (basemotion q976 #t25 #q8)
    )
    (:action s42_plan-base-motion
-          :parameters (q104 #q9)
-          :precondition (and (isbconf q104) (isbconf #q9))
-          :effect (basemotion q104 #t26 #q9)
+          :parameters (q976 #q9)
+          :precondition (and (isbconf q976) (isbconf #q9))
+          :effect (basemotion q976 #t26 #q9)
    )
    (:action s43_plan-base-motion
-          :parameters (q104 #q10)
-          :precondition (and (isbconf q104) (isbconf #q10))
-          :effect (basemotion q104 #t27 #q10)
+          :parameters (q976 #q10)
+          :precondition (and (isbconf q976) (isbconf #q10))
+          :effect (basemotion q976 #t27 #q10)
    )
    (:action s44_plan-base-motion
-          :parameters (q104 #q11)
-          :precondition (and (isbconf q104) (isbconf #q11))
-          :effect (basemotion q104 #t28 #q11)
+          :parameters (q976 #q11)
+          :precondition (and (isbconf q976) (isbconf #q11))
+          :effect (basemotion q976 #t28 #q11)
    )
    (:action s45_plan-base-motion
-          :parameters (q104 #q12)
-          :precondition (and (isbconf q104) (isbconf #q12))
-          :effect (basemotion q104 #t29 #q12)
+          :parameters (q976 #q12)
+          :precondition (and (isbconf q976) (isbconf #q12))
+          :effect (basemotion q976 #t29 #q12)
    )
    (:action s46_plan-base-motion
-          :parameters (q104 #q13)
-          :precondition (and (isbconf q104) (isbconf #q13))
-          :effect (basemotion q104 #t30 #q13)
+          :parameters (q976 #q13)
+          :precondition (and (isbconf q976) (isbconf #q13))
+          :effect (basemotion q976 #t30 #q13)
    )
    (:action s47_plan-base-motion
-          :parameters (q104 #q14)
-          :precondition (and (isbconf q104) (isbconf #q14))
-          :effect (basemotion q104 #t31 #q14)
+          :parameters (q976 #q14)
+          :precondition (and (isbconf q976) (isbconf #q14))
+          :effect (basemotion q976 #t31 #q14)
    )
    (:action s48_plan-base-motion
-          :parameters (q104 #q15)
-          :precondition (and (isbconf q104) (isbconf #q15))
-          :effect (basemotion q104 #t32 #q15)
+          :parameters (q976 #q15)
+          :precondition (and (isbconf q976) (isbconf #q15))
+          :effect (basemotion q976 #t32 #q15)
    )
    (:action s49_plan-base-motion
-          :parameters (#q0 q104)
-          :precondition (and (isbconf #q0) (isbconf q104))
-          :effect (basemotion #q0 #t33 q104)
+          :parameters (#q0 q976)
+          :precondition (and (isbconf #q0) (isbconf q976))
+          :effect (basemotion #q0 #t33 q976)
    )
    (:action s50_plan-base-motion
           :parameters (#q0 #q0)
@@ -565,9 +565,9 @@
           :effect (basemotion #q0 #t49 #q15)
    )
    (:action s66_plan-base-motion
-          :parameters (#q1 q104)
-          :precondition (and (isbconf #q1) (isbconf q104))
-          :effect (basemotion #q1 #t50 q104)
+          :parameters (#q1 q976)
+          :precondition (and (isbconf #q1) (isbconf q976))
+          :effect (basemotion #q1 #t50 q976)
    )
    (:action s67_plan-base-motion
           :parameters (#q1 #q0)
@@ -650,9 +650,9 @@
           :effect (basemotion #q1 #t66 #q15)
    )
    (:action s83_plan-base-motion
-          :parameters (#q2 q104)
-          :precondition (and (isbconf #q2) (isbconf q104))
-          :effect (basemotion #q2 #t67 q104)
+          :parameters (#q2 q976)
+          :precondition (and (isbconf #q2) (isbconf q976))
+          :effect (basemotion #q2 #t67 q976)
    )
    (:action s84_plan-base-motion
           :parameters (#q2 #q0)
@@ -735,9 +735,9 @@
           :effect (basemotion #q2 #t83 #q15)
    )
    (:action s100_plan-base-motion
-          :parameters (#q3 q104)
-          :precondition (and (isbconf #q3) (isbconf q104))
-          :effect (basemotion #q3 #t84 q104)
+          :parameters (#q3 q976)
+          :precondition (and (isbconf #q3) (isbconf q976))
+          :effect (basemotion #q3 #t84 q976)
    )
    (:action s101_plan-base-motion
           :parameters (#q3 #q0)
@@ -820,9 +820,9 @@
           :effect (basemotion #q3 #t100 #q15)
    )
    (:action s117_plan-base-motion
-          :parameters (#q4 q104)
-          :precondition (and (isbconf #q4) (isbconf q104))
-          :effect (basemotion #q4 #t101 q104)
+          :parameters (#q4 q976)
+          :precondition (and (isbconf #q4) (isbconf q976))
+          :effect (basemotion #q4 #t101 q976)
    )
    (:action s118_plan-base-motion
           :parameters (#q4 #q0)
@@ -905,9 +905,9 @@
           :effect (basemotion #q4 #t117 #q15)
    )
    (:action s134_plan-base-motion
-          :parameters (#q5 q104)
-          :precondition (and (isbconf #q5) (isbconf q104))
-          :effect (basemotion #q5 #t118 q104)
+          :parameters (#q5 q976)
+          :precondition (and (isbconf #q5) (isbconf q976))
+          :effect (basemotion #q5 #t118 q976)
    )
    (:action s135_plan-base-motion
           :parameters (#q5 #q0)
@@ -990,9 +990,9 @@
           :effect (basemotion #q5 #t134 #q15)
    )
    (:action s151_plan-base-motion
-          :parameters (#q6 q104)
-          :precondition (and (isbconf #q6) (isbconf q104))
-          :effect (basemotion #q6 #t135 q104)
+          :parameters (#q6 q976)
+          :precondition (and (isbconf #q6) (isbconf q976))
+          :effect (basemotion #q6 #t135 q976)
    )
    (:action s152_plan-base-motion
           :parameters (#q6 #q0)
@@ -1075,9 +1075,9 @@
           :effect (basemotion #q6 #t151 #q15)
    )
    (:action s168_plan-base-motion
-          :parameters (#q7 q104)
-          :precondition (and (isbconf #q7) (isbconf q104))
-          :effect (basemotion #q7 #t152 q104)
+          :parameters (#q7 q976)
+          :precondition (and (isbconf #q7) (isbconf q976))
+          :effect (basemotion #q7 #t152 q976)
    )
    (:action s169_plan-base-motion
           :parameters (#q7 #q0)
@@ -1160,9 +1160,9 @@
           :effect (basemotion #q7 #t168 #q15)
    )
    (:action s185_plan-base-motion
-          :parameters (#q8 q104)
-          :precondition (and (isbconf #q8) (isbconf q104))
-          :effect (basemotion #q8 #t169 q104)
+          :parameters (#q8 q976)
+          :precondition (and (isbconf #q8) (isbconf q976))
+          :effect (basemotion #q8 #t169 q976)
    )
    (:action s186_plan-base-motion
           :parameters (#q8 #q0)
@@ -1245,9 +1245,9 @@
           :effect (basemotion #q8 #t185 #q15)
    )
    (:action s202_plan-base-motion
-          :parameters (#q9 q104)
-          :precondition (and (isbconf #q9) (isbconf q104))
-          :effect (basemotion #q9 #t186 q104)
+          :parameters (#q9 q976)
+          :precondition (and (isbconf #q9) (isbconf q976))
+          :effect (basemotion #q9 #t186 q976)
    )
    (:action s203_plan-base-motion
           :parameters (#q9 #q0)
@@ -1330,9 +1330,9 @@
           :effect (basemotion #q9 #t202 #q15)
    )
    (:action s219_plan-base-motion
-          :parameters (#q10 q104)
-          :precondition (and (isbconf #q10) (isbconf q104))
-          :effect (basemotion #q10 #t203 q104)
+          :parameters (#q10 q976)
+          :precondition (and (isbconf #q10) (isbconf q976))
+          :effect (basemotion #q10 #t203 q976)
    )
    (:action s220_plan-base-motion
           :parameters (#q10 #q0)
@@ -1415,9 +1415,9 @@
           :effect (basemotion #q10 #t219 #q15)
    )
    (:action s236_plan-base-motion
-          :parameters (#q11 q104)
-          :precondition (and (isbconf #q11) (isbconf q104))
-          :effect (basemotion #q11 #t220 q104)
+          :parameters (#q11 q976)
+          :precondition (and (isbconf #q11) (isbconf q976))
+          :effect (basemotion #q11 #t220 q976)
    )
    (:action s237_plan-base-motion
           :parameters (#q11 #q0)
@@ -1500,9 +1500,9 @@
           :effect (basemotion #q11 #t236 #q15)
    )
    (:action s253_plan-base-motion
-          :parameters (#q12 q104)
-          :precondition (and (isbconf #q12) (isbconf q104))
-          :effect (basemotion #q12 #t237 q104)
+          :parameters (#q12 q976)
+          :precondition (and (isbconf #q12) (isbconf q976))
+          :effect (basemotion #q12 #t237 q976)
    )
    (:action s254_plan-base-motion
           :parameters (#q12 #q0)
@@ -1585,9 +1585,9 @@
           :effect (basemotion #q12 #t253 #q15)
    )
    (:action s270_plan-base-motion
-          :parameters (#q13 q104)
-          :precondition (and (isbconf #q13) (isbconf q104))
-          :effect (basemotion #q13 #t254 q104)
+          :parameters (#q13 q976)
+          :precondition (and (isbconf #q13) (isbconf q976))
+          :effect (basemotion #q13 #t254 q976)
    )
    (:action s271_plan-base-motion
           :parameters (#q13 #q0)
@@ -1670,9 +1670,9 @@
           :effect (basemotion #q13 #t270 #q15)
    )
    (:action s287_plan-base-motion
-          :parameters (#q14 q104)
-          :precondition (and (isbconf #q14) (isbconf q104))
-          :effect (basemotion #q14 #t271 q104)
+          :parameters (#q14 q976)
+          :precondition (and (isbconf #q14) (isbconf q976))
+          :effect (basemotion #q14 #t271 q976)
    )
    (:action s288_plan-base-motion
           :parameters (#q14 #q0)
@@ -1755,9 +1755,9 @@
           :effect (basemotion #q14 #t287 #q15)
    )
    (:action s304_plan-base-motion
-          :parameters (#q15 q104)
-          :precondition (and (isbconf #q15) (isbconf q104))
-          :effect (basemotion #q15 #t288 q104)
+          :parameters (#q15 q976)
+          :precondition (and (isbconf #q15) (isbconf q976))
+          :effect (basemotion #q15 #t288 q976)
    )
    (:action s305_plan-base-motion
           :parameters (#q15 #q0)

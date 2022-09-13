@@ -16,6 +16,9 @@ from utils.pybullet_tools.pr2_utils import set_arm_conf, REST_LEFT_ARM, open_arm
     close_arm, get_carry_conf, arm_conf, get_other_arm, set_group_conf, PR2_URDF, DRAKE_PR2_URDF, create_gripper
 
 from copy import copy
+import os
+
+file_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 
 class Scene_hanoi(object):
@@ -28,10 +31,10 @@ class Scene_hanoi(object):
 
                 self.grasp_type = 'side'
 
-                self.pr2 = load_pybullet("../pr2_description/urdf/pr2_simplified.urdf",
+                self.pr2 = load_pybullet(file_dir + "/pr2_description/urdf/pr2_simplified.urdf",
                                          fixed_base=True)
 
-                self.pr20 = load_pybullet("../pr2_description/urdf/pr2_simplified.urdf",
+                self.pr20 = load_pybullet(file_dir + "/pr2_description/urdf/pr2_simplified.urdf",
                                           fixed_base=True)
 
                 self.arms = [self.arm0, self.arm1, self.arm2]
@@ -46,14 +49,14 @@ class Scene_hanoi(object):
                 mass = 1
 
                 self.bd_body = {
-                    "floor": load_pybullet("../scenario_description/plane.urdf", fixed_base=True),
-                    "table": load_pybullet("../scenario_description/hanoi/table_narrow.urdf", fixed_base=True),
-                    "peg1": load_pybullet("../scenario_description/hanoi/rod.urdf", fixed_base=True),
-                    "peg2": load_pybullet("../scenario_description/hanoi/rod.urdf", fixed_base=True),
-                    "peg3": load_pybullet("../scenario_description/hanoi/rod.urdf", fixed_base=True),
-                    "disc1": load_pybullet("../scenario_description/hanoi/cylinder1.urdf", fixed_base=False),
-                    "disc2": load_pybullet("../scenario_description/hanoi/cylinder2.urdf", fixed_base=False),
-                    "disc3": load_pybullet("../scenario_description/hanoi/cylinder3.urdf", fixed_base=False),
+                    "floor": load_pybullet(file_dir + "/scenario_description/plane.urdf", fixed_base=True),
+                    "table": load_pybullet(file_dir + "/scenario_description/hanoi/table_narrow.urdf", fixed_base=True),
+                    "peg1": load_pybullet(file_dir + "/scenario_description/hanoi/rod.urdf", fixed_base=True),
+                    "peg2": load_pybullet(file_dir + "/scenario_description/hanoi/rod.urdf", fixed_base=True),
+                    "peg3": load_pybullet(file_dir + "/scenario_description/hanoi/rod.urdf", fixed_base=True),
+                    "disc1": load_pybullet(file_dir + "/scenario_description/hanoi/cylinder1.urdf", fixed_base=False),
+                    "disc2": load_pybullet(file_dir + "/scenario_description/hanoi/cylinder2.urdf", fixed_base=False),
+                    "disc3": load_pybullet(file_dir + "/scenario_description/hanoi/cylinder3.urdf", fixed_base=False),
                 }
                 self.bd_body.update(dict((self.bd_body[k], k) for k in self.bd_body))
 

@@ -16,7 +16,9 @@ from utils.pybullet_tools.pr2_utils import set_arm_conf, REST_LEFT_ARM, open_arm
     close_arm, get_carry_conf, arm_conf, get_other_arm, set_group_conf, PR2_URDF, DRAKE_PR2_URDF, create_gripper
 
 from copy import copy
+import os
 
+file_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 class PlanningScenario(object):
     def __init__(self):
@@ -26,7 +28,7 @@ class PlanningScenario(object):
                 self.grasp_type = 'top'
                 self.arm_right = get_other_arm(self.arm_left)
 
-                self.pr2 = load_pybullet("../pr2_description/urdf/pr2_simplified.urdf",
+                self.pr2 = load_pybullet(file_dir+"/pr2_description/urdf/pr2_simplified.urdf",
                                          fixed_base=True)
 
                 w = .22
@@ -36,7 +38,7 @@ class PlanningScenario(object):
                 mass = 1
 
                 self.bd_body = {
-                    "floor": load_pybullet("../scenario_description/plane.urdf", fixed_base=True),
+                    "floor": load_pybullet(file_dir+"/scenario_description/plane.urdf", fixed_base=True),
                     "table": create_box(w, w, h, color=(.75, .75, .75, 1)),
                     "sink": create_box(w, w, h, color=(.25, .25, .75, 1)),
                     "stove": create_box(w, w, h, color=(.75, .25, .25, 1)),

@@ -14,37 +14,41 @@ from utils.pybullet_tools.utils import WorldSaver, connect, dump_world, get_pose
 from utils.pybullet_tools.body_utils import draw_frame
 
 from copy import copy
+import os
+
+file_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 
 class PlanningScenario1(object):
     def __init__(self):
         with HideOutput():
             with LockRenderer():
-                self.arm_left = load_pybullet("../darias_description/urdf/darias_L_primitive_collision.urdf",
+                self.arm_left = load_pybullet(file_dir + "/darias_description/urdf/darias_L_primitive_collision.urdf",
                                               fixed_base=True)
                 set_pose(self.arm_left, Pose(Point(x=0.25, y=0.10, z=0.0), Euler(0, 0, 30 * np.pi / 180)))
-                self.arm_base = load_pybullet("../darias_description/urdf/darias_base.urdf", fixed_base=True)
+                self.arm_base = load_pybullet(file_dir + "/darias_description/urdf/darias_base.urdf", fixed_base=True)
                 set_pose(self.arm_base, Pose(Point(x=0.25, y=0.10, z=0.0), Euler(0, 0, 30 * np.pi / 180)))
 
                 self.bd_body = {
-                    'floor': load_pybullet("../scenario_description/floor.urdf", fixed_base=True),
+                    'floor': load_pybullet(file_dir + "/scenario_description/floor.urdf", fixed_base=True),
                     'cabinet_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
                         fixed_base=True),
                     'drawer_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
                         fixed_base=True),
                     'pegboard': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/pegboard.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/pegboard.urdf",
                         fixed_base=True),
-                    'region_shelf': load_pybullet("../scenario_description/region.urdf", fixed_base=True),
-                    'region_table': load_pybullet("../scenario_description/region.urdf", fixed_base=True),
-                    'region_drawer': load_pybullet("../scenario_description/region_small.urdf", fixed_base=True),
-                    'camera1': load_pybullet("../scenario_description/realsense.urdf", fixed_base=True),
-                    'box1': load_pybullet("../scenario_description/boxA.urdf", fixed_base=False),
+                    'region_shelf': load_pybullet(file_dir + "/scenario_description/region.urdf", fixed_base=True),
+                    'region_table': load_pybullet(file_dir + "/scenario_description/region.urdf", fixed_base=True),
+                    'region_drawer': load_pybullet(file_dir + "/scenario_description/region_small.urdf",
+                                                   fixed_base=True),
+                    'camera1': load_pybullet(file_dir + "/scenario_description/realsense.urdf", fixed_base=True),
+                    'box1': load_pybullet(file_dir + "/scenario_description/boxA.urdf", fixed_base=False),
 
-                    'box_S1': load_pybullet("../scenario_description/boxX.urdf", fixed_base=True),
-                    'box_S2': load_pybullet("../scenario_description/boxX.urdf", fixed_base=True),
+                    'box_S1': load_pybullet(file_dir + "/scenario_description/boxX.urdf", fixed_base=True),
+                    'box_S2': load_pybullet(file_dir + "/scenario_description/boxX.urdf", fixed_base=True),
 
                 }
                 self.all_bodies = [b for b in self.bd_body.values()]
@@ -142,31 +146,32 @@ class PlanningScenario2(object):
     def __init__(self):
         with HideOutput():
             with LockRenderer():
-                self.arm_left = load_pybullet("../darias_description/urdf/darias_L_primitive_collision.urdf",
+                self.arm_left = load_pybullet(file_dir + "/darias_description/urdf/darias_L_primitive_collision.urdf",
                                               fixed_base=True)
                 set_pose(self.arm_left, Pose(Point(x=0.27, y=0.12, z=0.0), Euler(0, 0, 30 * np.pi / 180)))
-                self.arm_base = load_pybullet("../darias_description/urdf/darias_base.urdf", fixed_base=True)
+                self.arm_base = load_pybullet(file_dir + "/darias_description/urdf/darias_base.urdf", fixed_base=True)
                 set_pose(self.arm_base, Pose(Point(x=0.27, y=0.12, z=0.0), Euler(0, 0, 30 * np.pi / 180)))
 
                 self.bd_body = {
-                    'floor': load_pybullet("../scenario_description/floor.urdf", fixed_base=True),
+                    'floor': load_pybullet(file_dir + "/scenario_description/floor.urdf", fixed_base=True),
                     'cabinet_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
                         fixed_base=True),
                     'drawer_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
                         fixed_base=True),
                     'pegboard': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/pegboard.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/pegboard.urdf",
                         fixed_base=True),
-                    'region_shelf': load_pybullet("../scenario_description/region.urdf", fixed_base=True),
-                    'region_table': load_pybullet("../scenario_description/region.urdf", fixed_base=True),
-                    'region_drawer': load_pybullet("../scenario_description/region_small.urdf", fixed_base=True),
-                    'camera1': load_pybullet("../scenario_description/realsense.urdf", fixed_base=True),
-                    'box1': load_pybullet("../scenario_description/boxA.urdf", fixed_base=False),
+                    'region_shelf': load_pybullet(file_dir + "/scenario_description/region.urdf", fixed_base=True),
+                    'region_table': load_pybullet(file_dir + "/scenario_description/region.urdf", fixed_base=True),
+                    'region_drawer': load_pybullet(file_dir + "/scenario_description/region_small.urdf",
+                                                   fixed_base=True),
+                    'camera1': load_pybullet(file_dir + "/scenario_description/realsense.urdf", fixed_base=True),
+                    'box1': load_pybullet(file_dir + "/scenario_description/boxA.urdf", fixed_base=False),
 
-                    'box_S2': load_pybullet("../scenario_description/boxX.urdf", fixed_base=True),
-                    'box_S3': load_pybullet("../scenario_description/boxX.urdf", fixed_base=True),
+                    'box_S2': load_pybullet(file_dir + "/scenario_description/boxX.urdf", fixed_base=True),
+                    'box_S3': load_pybullet(file_dir + "/scenario_description/boxX.urdf", fixed_base=True),
 
                 }
                 self.all_bodies = [b for b in self.bd_body.values()]
@@ -264,32 +269,33 @@ class Scene_regrasp1(object):
     def __init__(self):
         with HideOutput():
             with LockRenderer():
-                self.arm_left = load_pybullet("../darias_description/urdf/darias_L_primitive_collision.urdf",
+                self.arm_left = load_pybullet(file_dir + "/darias_description/urdf/darias_L_primitive_collision.urdf",
                                               fixed_base=True)
                 set_pose(self.arm_left, Pose(Point(x=0.2, y=0.15, z=0.1), Euler(0, 0, 30 * np.pi / 180)))
-                self.arm_base = load_pybullet("../darias_description/urdf/darias_base.urdf", fixed_base=True)
+                self.arm_base = load_pybullet(file_dir + "/darias_description/urdf/darias_base.urdf", fixed_base=True)
                 set_pose(self.arm_base, Pose(Point(x=0.2, y=0.15, z=0.1), Euler(0, 0, 30 * np.pi / 180)))
 
                 self.bd_body = {
-                    'floor': load_pybullet("../scenario_description/floor.urdf", fixed_base=True),
+                    'floor': load_pybullet(file_dir + "/scenario_description/floor.urdf", fixed_base=True),
                     'cabinet_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
                         fixed_base=True),
                     'drawer_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
                         fixed_base=True),
                     'pegboard': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/pegboard.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/pegboard.urdf",
                         fixed_base=True),
-                    'region_shelf': load_pybullet("../scenario_description/region.urdf", fixed_base=True),
-                    'region_table': load_pybullet("../scenario_description/region.urdf", fixed_base=True),
-                    'region_drawer': load_pybullet("../scenario_description/region_small.urdf", fixed_base=True),
-                    'camera1': load_pybullet("../scenario_description/realsense.urdf", fixed_base=True),
-                    'box1': load_pybullet("../scenario_description/boxA.urdf", fixed_base=False),
+                    'region_shelf': load_pybullet(file_dir + "/scenario_description/region.urdf", fixed_base=True),
+                    'region_table': load_pybullet(file_dir + "/scenario_description/region.urdf", fixed_base=True),
+                    'region_drawer': load_pybullet(file_dir + "/scenario_description/region_small.urdf",
+                                                   fixed_base=True),
+                    'camera1': load_pybullet(file_dir + "/scenario_description/realsense.urdf", fixed_base=True),
+                    'box1': load_pybullet(file_dir + "/scenario_description/boxA.urdf", fixed_base=False),
 
-                    'box_S1': load_pybullet("../scenario_description/boxX.urdf", fixed_base=True),
-                    'box_S2': load_pybullet("../scenario_description/boxX.urdf", fixed_base=True),
-                    'box_S3': load_pybullet("../scenario_description/boxX.urdf", fixed_base=True),
+                    'box_S1': load_pybullet(file_dir + "/scenario_description/boxX.urdf", fixed_base=True),
+                    'box_S2': load_pybullet(file_dir + "/scenario_description/boxX.urdf", fixed_base=True),
+                    'box_S3': load_pybullet(file_dir + "/scenario_description/boxX.urdf", fixed_base=True),
                 }
                 self.all_bodies = [b for b in self.bd_body.values()]
                 self.bd_body.update(dict((self.bd_body[k], k) for k in self.bd_body))
@@ -380,37 +386,39 @@ class Scene_regrasp1(object):
 
         r.show()
 
+
 class PlanningScenario3(object):
     def __init__(self):
         with HideOutput():
             with LockRenderer():
-                self.arm_left = load_pybullet("../darias_description/urdf/darias_L_primitive_collision.urdf",
+                self.arm_left = load_pybullet(file_dir + "/darias_description/urdf/darias_L_primitive_collision.urdf",
                                               fixed_base=True)
                 set_pose(self.arm_left, Pose(Point(x=0.2, y=0.10, z=0.0), Euler(0, 0, 30 * np.pi / 180)))
-                self.arm_base = load_pybullet("../darias_description/urdf/darias_base.urdf", fixed_base=True)
+                self.arm_base = load_pybullet(file_dir + "/darias_description/urdf/darias_base.urdf", fixed_base=True)
                 set_pose(self.arm_base, Pose(Point(x=0.2, y=0.10, z=0.0), Euler(0, 0, 30 * np.pi / 180)))
 
                 self.bd_body = {
-                    'floor': load_pybullet("../scenario_description/floor.urdf", fixed_base=True),
+                    'floor': load_pybullet(file_dir + "/scenario_description/floor.urdf", fixed_base=True),
                     'cabinet_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
                         fixed_base=True),
                     'drawer_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
                         fixed_base=True),
                     'pegboard': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/pegboard.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/pegboard.urdf",
                         fixed_base=True),
-                    'region_shelf': load_pybullet("../scenario_description/region.urdf", fixed_base=True),
-                    'region_table': load_pybullet("../scenario_description/region.urdf", fixed_base=True),
-                    'region_drawer': load_pybullet("../scenario_description/region_small.urdf", fixed_base=True),
-                    'camera1': load_pybullet("../scenario_description/realsense.urdf", fixed_base=True),
-                    'box1': load_pybullet("../scenario_description/boxA.urdf", fixed_base=False),
+                    'region_shelf': load_pybullet(file_dir + "/scenario_description/region.urdf", fixed_base=True),
+                    'region_table': load_pybullet(file_dir + "/scenario_description/region.urdf", fixed_base=True),
+                    'region_drawer': load_pybullet(file_dir + "/scenario_description/region_small.urdf",
+                                                   fixed_base=True),
+                    'camera1': load_pybullet(file_dir + "/scenario_description/realsense.urdf", fixed_base=True),
+                    'box1': load_pybullet(file_dir + "/scenario_description/boxA.urdf", fixed_base=False),
 
-                    'box_S1': load_pybullet("../scenario_description/boxX.urdf", fixed_base=True),
-                    'box_S2': load_pybullet("../scenario_description/boxX.urdf", fixed_base=True),
-                    'box_S3': load_pybullet("../scenario_description/boxX.urdf", fixed_base=True),
-                    'box_S4': load_pybullet("../scenario_description/boxX.urdf", fixed_base=True),
+                    'box_S1': load_pybullet(file_dir + "/scenario_description/boxX.urdf", fixed_base=True),
+                    'box_S2': load_pybullet(file_dir + "/scenario_description/boxX.urdf", fixed_base=True),
+                    'box_S3': load_pybullet(file_dir + "/scenario_description/boxX.urdf", fixed_base=True),
+                    'box_S4': load_pybullet(file_dir + "/scenario_description/boxX.urdf", fixed_base=True),
                 }
                 self.all_bodies = [b for b in self.bd_body.values()]
                 self.bd_body.update(dict((self.bd_body[k], k) for k in self.bd_body))
@@ -507,31 +515,32 @@ class PlanningScenario4(object):
     def __init__(self):
         with HideOutput():
             with LockRenderer():
-                self.arm_left = load_pybullet("../darias_description/urdf/darias_L_primitive_collision.urdf",
+                self.arm_left = load_pybullet(file_dir + "/darias_description/urdf/darias_L_primitive_collision.urdf",
                                               fixed_base=True)
                 set_pose(self.arm_left, Pose(Point(x=0.2, y=0.10, z=0.0), Euler(0, 0, 30 * np.pi / 180)))
-                self.arm_base = load_pybullet("../darias_description/urdf/darias_base.urdf", fixed_base=True)
+                self.arm_base = load_pybullet(file_dir + "/darias_description/urdf/darias_base.urdf", fixed_base=True)
                 set_pose(self.arm_base, Pose(Point(x=0.2, y=0.10, z=0.0), Euler(0, 0, 30 * np.pi / 180)))
 
                 self.bd_body = {
-                    'floor': load_pybullet("../scenario_description/floor.urdf", fixed_base=True),
+                    'floor': load_pybullet(file_dir + "/scenario_description/floor.urdf", fixed_base=True),
                     'cabinet_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
                         fixed_base=True),
                     'drawer_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
                         fixed_base=True),
                     'pegboard': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/pegboard.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/pegboard.urdf",
                         fixed_base=True),
-                    'region_shelf': load_pybullet("../scenario_description/region.urdf", fixed_base=True),
-                    'region_table': load_pybullet("../scenario_description/region.urdf", fixed_base=True),
-                    'region_drawer': load_pybullet("../scenario_description/region_small.urdf", fixed_base=True),
-                    'camera1': load_pybullet("../scenario_description/realsense.urdf", fixed_base=True),
-                    'box1': load_pybullet("../scenario_description/boxA.urdf", fixed_base=False),
+                    'region_shelf': load_pybullet(file_dir + "/scenario_description/region.urdf", fixed_base=True),
+                    'region_table': load_pybullet(file_dir + "/scenario_description/region.urdf", fixed_base=True),
+                    'region_drawer': load_pybullet(file_dir + "/scenario_description/region_small.urdf",
+                                                   fixed_base=True),
+                    'camera1': load_pybullet(file_dir + "/scenario_description/realsense.urdf", fixed_base=True),
+                    'box1': load_pybullet(file_dir + "/scenario_description/boxA.urdf", fixed_base=False),
 
-                    'box_S2': load_pybullet("../scenario_description/boxX.urdf", fixed_base=True),
-                    'box_S3': load_pybullet("../scenario_description/boxX.urdf", fixed_base=True),
+                    'box_S2': load_pybullet(file_dir + "/scenario_description/boxX.urdf", fixed_base=True),
+                    'box_S3': load_pybullet(file_dir + "/scenario_description/boxX.urdf", fixed_base=True),
                 }
                 self.all_bodies = [b for b in self.bd_body.values()]
                 self.bd_body.update(dict((self.bd_body[k], k) for k in self.bd_body))

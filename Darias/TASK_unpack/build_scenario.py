@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from __future__ import print_function
+
 import numpy as np
 
 import time
@@ -15,30 +16,34 @@ from utils.pybullet_tools.body_utils import draw_frame
 
 from copy import copy
 
+import os
+
+file_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+
 
 class Scene_unpack1(object):
     def __init__(self):
         with HideOutput():
             with LockRenderer():
-                self.arm_left = load_pybullet("../darias_description/urdf/darias_L_primitive_collision.urdf",
+                self.arm_left = load_pybullet(file_dir + "/darias_description/urdf/darias_L_primitive_collision.urdf",
                                               fixed_base=True)
-                self.arm_base = load_pybullet("../darias_description/urdf/darias_base.urdf", fixed_base=True)
+                self.arm_base = load_pybullet(file_dir + "/darias_description/urdf/darias_base.urdf", fixed_base=True)
 
                 self.bd_body = {
-                    'floor': load_pybullet("../scenario_description/floor.urdf", fixed_base=True),
+                    'floor': load_pybullet(file_dir + "/scenario_description/floor.urdf", fixed_base=True),
                     'cabinet_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
                         fixed_base=True),
                     'drawer_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
                         fixed_base=True),
                     'pegboard': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/pegboard.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/pegboard.urdf",
                         fixed_base=True),
-                    'region1': load_pybullet("../scenario_description/region.urdf", fixed_base=True),
-                    'region2': load_pybullet("../scenario_description/region_big.urdf",
+                    'region1': load_pybullet(file_dir + "/scenario_description/region.urdf", fixed_base=True),
+                    'region2': load_pybullet(file_dir + "/scenario_description/region_big.urdf",
                                              fixed_base=True),
-                    'c1': load_pybullet("../scenario_description/boxCm.urdf", fixed_base=False),
+                    'c1': load_pybullet(file_dir + "/scenario_description/boxCm.urdf", fixed_base=False),
                 }
                 self.bd_body.update(dict((self.bd_body[k], k) for k in self.bd_body))
 
@@ -97,37 +102,37 @@ class Scene_unpack1(object):
                 set_pose(self.bd_body['c1'],
                          Pose(Point(x=0.375, y=0.9, z=stable_z(self.bd_body['c1'], self.bd_body['region1']))))
 
-
                 set_camera(150, -35, 1.6, Point(-0.1, 0.1, -0.1))
 
     def get_elemetns(self):
         self.reset()
         return self.arm_left, self.movable_bodies, self.regions
 
+
 class Scene_unpack2(object):
     def __init__(self):
         with HideOutput():
             with LockRenderer():
-                self.arm_left = load_pybullet("../darias_description/urdf/darias_L_primitive_collision.urdf",
+                self.arm_left = load_pybullet(file_dir + "/darias_description/urdf/darias_L_primitive_collision.urdf",
                                               fixed_base=True)
-                self.arm_base = load_pybullet("../darias_description/urdf/darias_base.urdf", fixed_base=True)
+                self.arm_base = load_pybullet(file_dir + "/darias_description/urdf/darias_base.urdf", fixed_base=True)
 
                 self.bd_body = {
-                    'floor': load_pybullet("../scenario_description/floor.urdf", fixed_base=True),
-                    'cabinet_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
-                        fixed_base=True),
-                    'drawer_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
-                        fixed_base=True),
-                    'pegboard': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/pegboard.urdf",
-                        fixed_base=True),
-                    'region1': load_pybullet("../scenario_description/region.urdf", fixed_base=True),
-                    'region2': load_pybullet("../scenario_description/region_big.urdf",
+                    'floor': load_pybullet(file_dir + "/scenario_description/floor.urdf", fixed_base=True),
+                    'cabinet_shelf': load_pybullet(file_dir +
+                                                   "/scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
+                                                   fixed_base=True),
+                    'drawer_shelf': load_pybullet(file_dir +
+                                                  "/scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
+                                                  fixed_base=True),
+                    'pegboard': load_pybullet(file_dir +
+                                              "/scenario_description/manipulation_worlds/urdf/pegboard.urdf",
+                                              fixed_base=True),
+                    'region1': load_pybullet(file_dir + "/scenario_description/region.urdf", fixed_base=True),
+                    'region2': load_pybullet(file_dir + "/scenario_description/region_big.urdf",
                                              fixed_base=True),
-                    'c1': load_pybullet("../scenario_description/boxCm.urdf", fixed_base=False),
-                    'c2': load_pybullet("../scenario_description/boxC.urdf", fixed_base=False),
+                    'c1': load_pybullet(file_dir + "/scenario_description/boxCm.urdf", fixed_base=False),
+                    'c2': load_pybullet(file_dir + "/scenario_description/boxC.urdf", fixed_base=False),
                 }
                 self.bd_body.update(dict((self.bd_body[k], k) for k in self.bd_body))
 
@@ -188,7 +193,6 @@ class Scene_unpack2(object):
                 set_pose(self.bd_body['c2'],
                          Pose(Point(x=0.32, y=0.9, z=stable_z(self.bd_body['c2'], self.bd_body['region1']))))
 
-
                 set_camera(150, -35, 1.6, Point(-0.1, 0.1, -0.1))
 
     def get_elemetns(self):
@@ -200,27 +204,27 @@ class Scene_unpack3(object):
     def __init__(self):
         with HideOutput():
             with LockRenderer():
-                self.arm_left = load_pybullet("../darias_description/urdf/darias_L_primitive_collision.urdf",
+                self.arm_left = load_pybullet(file_dir + "/darias_description/urdf/darias_L_primitive_collision.urdf",
                                               fixed_base=True)
-                self.arm_base = load_pybullet("../darias_description/urdf/darias_base.urdf", fixed_base=True)
+                self.arm_base = load_pybullet(file_dir + "/darias_description/urdf/darias_base.urdf", fixed_base=True)
 
                 self.bd_body = {
-                    'floor': load_pybullet("../scenario_description/floor.urdf", fixed_base=True),
+                    'floor': load_pybullet(file_dir + "/scenario_description/floor.urdf", fixed_base=True),
                     'cabinet_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/cabinet_shelf.urdf",
                         fixed_base=True),
                     'drawer_shelf': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/drawer_shelf.urdf",
                         fixed_base=True),
                     'pegboard': load_pybullet(
-                        "../scenario_description/manipulation_worlds/urdf/pegboard.urdf",
+                        file_dir + "/scenario_description/manipulation_worlds/urdf/pegboard.urdf",
                         fixed_base=True),
-                    'region1': load_pybullet("../scenario_description/region.urdf", fixed_base=True),
-                    'region2': load_pybullet("../scenario_description/region_big.urdf",
+                    'region1': load_pybullet(file_dir + "/scenario_description/region.urdf", fixed_base=True),
+                    'region2': load_pybullet(file_dir + "/scenario_description/region_big.urdf",
                                              fixed_base=True),
-                    'c1': load_pybullet("../scenario_description/boxCm.urdf", fixed_base=False),
-                    'c2': load_pybullet("../scenario_description/boxC.urdf", fixed_base=False),
-                    'c3': load_pybullet("../scenario_description/boxCx.urdf", fixed_base=False),
+                    'c1': load_pybullet(file_dir + "/scenario_description/boxCm.urdf", fixed_base=False),
+                    'c2': load_pybullet(file_dir + "/scenario_description/boxC.urdf", fixed_base=False),
+                    'c3': load_pybullet(file_dir + "/scenario_description/boxCx.urdf", fixed_base=False),
                 }
                 self.bd_body.update(dict((self.bd_body[k], k) for k in self.bd_body))
 
@@ -295,7 +299,7 @@ class Scene_unpack3(object):
 def display_scenario():
     connect(use_gui=True)
 
-    scn = Scene_unpack1()
+    scn = Scene_unpack3()
     scn.reset()
 
     for i in range(10000):

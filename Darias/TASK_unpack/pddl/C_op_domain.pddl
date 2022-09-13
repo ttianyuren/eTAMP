@@ -1,6 +1,6 @@
-;10:00:48 21/02
+;14:12:23 13/09
 
-;Skeleton_SN = 4
+;Skeleton_SN = 0
 
 (define (domain pick-and-place_propo_reorder)
    (:requirements :strips :equality :action-costs)
@@ -68,123 +68,68 @@
    )
 
    (:action a0_move_free
-          :parameters (q344 #q1 #t22)
-          :precondition (and (isfreemotion q344 #t22 #q1) (atconf q344) (handempty) (canmove) (_applicable _p0))
-          :effect (and (atconf #q1) (not (atconf q344)) (not (canmove)) (canpick) (increase (total-cost) 100) (not (_applicable _p0)) (not (_unused _s18)) (not (_unused _s38)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s11)) (not (_unused _s12)) (not (_unused _s17)) (not (_unused _s20)) (not (_unused _s21)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p1)) (not (_unused _s18)) (not (_unused _s38)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s11)) (not (_unused _s12)) (not (_unused _s17)) (not (_unused _s20)) (not (_unused _s21)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p1)))
+          :parameters (q808 #q0 #t21)
+          :precondition (and (isfreemotion q808 #t21 #q0) (atconf q808) (handempty) (canmove) (_applicable _p0))
+          :effect (and (atconf #q0) (not (atconf q808)) (not (canmove)) (canpick) (increase (total-cost) 100) (not (_applicable _p0)) (not (_unused _s17)) (not (_unused _s37)) (when (and (not (_unused _s1)) (not (_unused _s4)) (not (_unused _s11)) (not (_unused _s20)) (not (_unused _s64)) (not (_unused _s149))) (_applicable _p1)) (not (_unused _s17)) (not (_unused _s37)) (when (and (not (_unused _s1)) (not (_unused _s4)) (not (_unused _s11)) (not (_unused _s20)) (not (_unused _s64)) (not (_unused _s149))) (_applicable _p1)))
    )
    (:action a1_pick
-          :parameters (o9 p208 #g1 #q1 #t2)
-          :precondition (and (iskin o9 p208 #g1 #q1 #t2) (atpose o9 p208) (handempty) (atconf #q1) (canpick) (not (usedgrasp o9 p208 #g1)) (graspatpose #g1 p208) (_applicable _p1))
-          :effect (and (atgrasp o9 #g1) (canmove) (not (atpose o9 p208)) (not (handempty)) (increase (total-cost) 100) (not (_applicable _p1)) (not (_unused _s12)) (not (_unused _s18)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s11)) (not (_unused _s17)) (not (_unused _s20)) (not (_unused _s21)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p2)) (not (_unused _s12)) (not (_unused _s18)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s11)) (not (_unused _s17)) (not (_unused _s20)) (not (_unused _s21)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p2)))
+          :parameters (o8 p288 #g0 #q0 #t1)
+          :precondition (and (iskin o8 p288 #g0 #q0 #t1) (atpose o8 p288) (handempty) (atconf #q0) (canpick) (not (usedgrasp o8 p288 #g0)) (graspatpose #g0 p288) (_applicable _p1))
+          :effect (and (atgrasp o8 #g0) (canmove) (not (atpose o8 p288)) (not (handempty)) (increase (total-cost) 100) (not (_applicable _p1)) (not (_unused _s17)) (not (_unused _s11)) (when (and (not (_unused _s1)) (not (_unused _s4)) (not (_unused _s20)) (not (_unused _s37)) (not (_unused _s64)) (not (_unused _s149))) (_applicable _p2)) (not (_unused _s17)) (not (_unused _s11)) (when (and (not (_unused _s1)) (not (_unused _s4)) (not (_unused _s20)) (not (_unused _s37)) (not (_unused _s64)) (not (_unused _s149))) (_applicable _p2)))
    )
    (:action a2_move_holding
-          :parameters (#q1 #q4 o9 #g1 #t182)
-          :precondition (and (isholdingmotion #q1 #t182 #q4 o9 #g1) (atconf #q1) (atgrasp o9 #g1) (canmove) (_applicable _p2))
-          :effect (and (atconf #q4) (not (atconf #q1)) (not (canmove)) (canpick) (canplace) (increase (total-cost) 100) (not (_applicable _p2)) (not (_unused _s12)) (not (_unused _s21)) (not (_unused _s18)) (not (_unused _s198)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s11)) (not (_unused _s17)) (not (_unused _s20)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s149))) (_applicable _p3)) (not (_unused _s12)) (not (_unused _s21)) (not (_unused _s18)) (not (_unused _s198)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s11)) (not (_unused _s17)) (not (_unused _s20)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s149))) (_applicable _p3)))
+          :parameters (#q0 #q3 o8 #g0 #t133)
+          :precondition (and (isholdingmotion #q0 #t133 #q3 o8 #g0) (atconf #q0) (atgrasp o8 #g0) (canmove) (_applicable _p2))
+          :effect (and (atconf #q3) (not (atconf #q0)) (not (canmove)) (canpick) (canplace) (increase (total-cost) 100) (not (_applicable _p2)) (not (_unused _s17)) (not (_unused _s11)) (not (_unused _s20)) (not (_unused _s149)) (when (and (not (_unused _s1)) (not (_unused _s4)) (not (_unused _s37)) (not (_unused _s64))) (_applicable _p3)) (not (_unused _s17)) (not (_unused _s11)) (not (_unused _s20)) (not (_unused _s149)) (when (and (not (_unused _s1)) (not (_unused _s4)) (not (_unused _s37)) (not (_unused _s64))) (_applicable _p3)))
    )
    (:action a3_place
-          :parameters (o9 #p2 o6 #g1 #q4 #t5)
-          :precondition (and (iskin o9 #p2 #g1 #q4 #t5) (issupport o9 #p2 o6) (atgrasp o9 #g1) (atconf #q4) (graspable o9) (fixed o6) (canplace) (_applicable _p3))
-          :effect (and (atpose o9 #p2) (handempty) (canmove) (not (atgrasp o9 #g1)) (not (canpick)) (not (canplace)) (increase (total-cost) 100) (allowlocate) (not (located o9 #p2)) (usedgrasp o9 #p2 #g1) (not (_applicable _p3)) (not (_unused _s2)) (not (_unused _s21)) (not (_unused _s12)) (when (and (not (_unused _s1)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s11)) (not (_unused _s17)) (not (_unused _s18)) (not (_unused _s20)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p4)) (not (_unused _s2)) (not (_unused _s21)) (not (_unused _s12)) (when (and (not (_unused _s1)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s11)) (not (_unused _s17)) (not (_unused _s18)) (not (_unused _s20)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p4)))
+          :parameters (o8 #p1 o7 #g0 #q3 #t4)
+          :precondition (and (iskin o8 #p1 #g0 #q3 #t4) (issupport o8 #p1 o7) (atgrasp o8 #g0) (atconf #q3) (graspable o8) (fixed o7) (canplace) (_applicable _p3))
+          :effect (and (atpose o8 #p1) (handempty) (canmove) (not (atgrasp o8 #g0)) (not (canpick)) (not (canplace)) (increase (total-cost) 100) (allowlocate) (not (located o8 #p1)) (usedgrasp o8 #p1 #g0) (not (_applicable _p3)) (not (_unused _s1)) (not (_unused _s11)) (not (_unused _s20)) (when (and (not (_unused _s4)) (not (_unused _s17)) (not (_unused _s37)) (not (_unused _s64)) (not (_unused _s149))) (_applicable _p4)) (not (_unused _s1)) (not (_unused _s11)) (not (_unused _s20)) (when (and (not (_unused _s4)) (not (_unused _s17)) (not (_unused _s37)) (not (_unused _s64)) (not (_unused _s149))) (_applicable _p4)))
    )
    (:action a4_move_free
-          :parameters (#q4 #q0 #t56)
-          :precondition (and (isfreemotion #q4 #t56 #q0) (atconf #q4) (handempty) (canmove) (_applicable _p4))
-          :effect (and (atconf #q0) (not (atconf #q4)) (not (canmove)) (canpick) (increase (total-cost) 100) (not (_applicable _p4)) (not (_unused _s21)) (not (_unused _s72)) (not (_unused _s17)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s11)) (not (_unused _s12)) (not (_unused _s18)) (not (_unused _s20)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p5)) (not (_unused _s21)) (not (_unused _s72)) (not (_unused _s17)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s11)) (not (_unused _s12)) (not (_unused _s18)) (not (_unused _s20)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p5)))
-   )
-   (:action a5_pick
-          :parameters (o8 p40 #g0 #q0 #t1)
-          :precondition (and (iskin o8 p40 #g0 #q0 #t1) (atpose o8 p40) (handempty) (atconf #q0) (canpick) (not (usedgrasp o8 p40 #g0)) (graspatpose #g0 p40) (_applicable _p5))
-          :effect (and (atgrasp o8 #g0) (canmove) (not (atpose o8 p40)) (not (handempty)) (increase (total-cost) 100) (not (_applicable _p5)) (not (_unused _s11)) (not (_unused _s17)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s12)) (not (_unused _s18)) (not (_unused _s20)) (not (_unused _s21)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p6)) (not (_unused _s11)) (not (_unused _s17)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s12)) (not (_unused _s18)) (not (_unused _s20)) (not (_unused _s21)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p6)))
-   )
-   (:action a6_move_holding
-          :parameters (#q0 #q3 o8 #g0 #t133)
-          :precondition (and (isholdingmotion #q0 #t133 #q3 o8 #g0) (atconf #q0) (atgrasp o8 #g0) (canmove) (_applicable _p6))
-          :effect (and (atconf #q3) (not (atconf #q0)) (not (canmove)) (canpick) (canplace) (increase (total-cost) 100) (not (_applicable _p6)) (not (_unused _s149)) (not (_unused _s11)) (not (_unused _s17)) (not (_unused _s20)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s12)) (not (_unused _s18)) (not (_unused _s21)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s198))) (_applicable _p7)) (not (_unused _s149)) (not (_unused _s11)) (not (_unused _s17)) (not (_unused _s20)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s12)) (not (_unused _s18)) (not (_unused _s21)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s198))) (_applicable _p7)))
-   )
-   (:action a7_place
-          :parameters (o8 #p1 o7 #g0 #q3 #t4)
-          :precondition (and (iskin o8 #p1 #g0 #q3 #t4) (issupport o8 #p1 o7) (atgrasp o8 #g0) (atconf #q3) (graspable o8) (fixed o7) (canplace) (_applicable _p7))
-          :effect (and (atpose o8 #p1) (handempty) (canmove) (not (atgrasp o8 #g0)) (not (canpick)) (not (canplace)) (increase (total-cost) 100) (allowlocate) (not (located o8 #p1)) (usedgrasp o8 #p1 #g0) (not (_applicable _p7)) (not (_unused _s11)) (not (_unused _s1)) (not (_unused _s20)) (when (and (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s12)) (not (_unused _s17)) (not (_unused _s18)) (not (_unused _s21)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p8)) (not (_unused _s11)) (not (_unused _s1)) (not (_unused _s20)) (when (and (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s12)) (not (_unused _s17)) (not (_unused _s18)) (not (_unused _s21)) (not (_unused _s38)) (not (_unused _s64)) (not (_unused _s72)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p8)))
-   )
-   (:action a8_move_free
-          :parameters (#q3 q344 #t48)
-          :precondition (and (isfreemotion #q3 #t48 q344) (atconf #q3) (handempty) (canmove) (_applicable _p8))
-          :effect (and (atconf q344) (not (atconf #q3)) (not (canmove)) (canpick) (increase (total-cost) 100) (not (_applicable _p8)) (not (_unused _s64)) (not (_unused _s20)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s11)) (not (_unused _s12)) (not (_unused _s17)) (not (_unused _s18)) (not (_unused _s21)) (not (_unused _s38)) (not (_unused _s72)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p9)) (not (_unused _s64)) (not (_unused _s20)) (when (and (not (_unused _s1)) (not (_unused _s2)) (not (_unused _s4)) (not (_unused _s5)) (not (_unused _s11)) (not (_unused _s12)) (not (_unused _s17)) (not (_unused _s18)) (not (_unused _s21)) (not (_unused _s38)) (not (_unused _s72)) (not (_unused _s149)) (not (_unused _s198))) (_applicable _p9)))
+          :parameters (#q3 q808 #t48)
+          :precondition (and (isfreemotion #q3 #t48 q808) (atconf #q3) (handempty) (canmove) (_applicable _p4))
+          :effect (and (atconf q808) (not (atconf #q3)) (not (canmove)) (canpick) (increase (total-cost) 100) (not (_applicable _p4)) (not (_unused _s20)) (not (_unused _s64)) (when (and (not (_unused _s1)) (not (_unused _s4)) (not (_unused _s11)) (not (_unused _s17)) (not (_unused _s37)) (not (_unused _s149))) (_applicable _p5)) (not (_unused _s20)) (not (_unused _s64)) (when (and (not (_unused _s1)) (not (_unused _s4)) (not (_unused _s11)) (not (_unused _s17)) (not (_unused _s37)) (not (_unused _s149))) (_applicable _p5)))
    )
    (:action s1_sample-place
           :parameters (o8 o7)
           :precondition (stackable o8 o7)
           :effect (and (ispose o8 #p1) (issupport o8 #p1 o7) (_unused _s1))
    )
-   (:action s2_sample-place
-          :parameters (o9 o6)
-          :precondition (stackable o9 o6)
-          :effect (and (ispose o9 #p2) (issupport o9 #p2 o6) (_unused _s2))
-   )
    (:action s4_sample-grasp-dir
-          :parameters (o8 p40)
-          :precondition (and (graspable o8) (ispose o8 p40))
-          :effect (and (isgraspdir o8 p40 #d0) (_unused _s4))
-   )
-   (:action s5_sample-grasp-dir
-          :parameters (o9 p208)
-          :precondition (and (graspable o9) (ispose o9 p208))
-          :effect (and (isgraspdir o9 p208 #d1) (_unused _s5))
+          :parameters (o8 p288)
+          :precondition (and (graspable o8) (ispose o8 p288))
+          :effect (and (isgraspdir o8 p288 #d0) (_unused _s4))
    )
    (:action s11_sample-grasp
-          :parameters (o8 p40 #d0)
-          :precondition (isgraspdir o8 p40 #d0)
-          :effect (and (graspatpose #g0 p40) (isgrasp o8 #g0) (not (_unused _s4)) (_unused _s11))
-   )
-   (:action s12_sample-grasp
-          :parameters (o9 p208 #d1)
-          :precondition (isgraspdir o9 p208 #d1)
-          :effect (and (graspatpose #g1 p208) (isgrasp o9 #g1) (not (_unused _s5)) (_unused _s12))
+          :parameters (o8 p288 #d0)
+          :precondition (isgraspdir o8 p288 #d0)
+          :effect (and (graspatpose #g0 p288) (isgrasp o8 #g0) (not (_unused _s4)) (_unused _s11))
    )
    (:action s17_inverse-kinematics
-          :parameters (o8 p40 #g0)
-          :precondition (and (ispose o8 p40) (isgrasp o8 #g0))
-          :effect (and (isconf #q0) (istraj #t1) (iskin o8 p40 #g0 #q0 #t1) (not (_unused _s11)) (_unused _s17))
-   )
-   (:action s18_inverse-kinematics
-          :parameters (o9 p208 #g1)
-          :precondition (and (ispose o9 p208) (isgrasp o9 #g1))
-          :effect (and (isconf #q1) (istraj #t2) (iskin o9 p208 #g1 #q1 #t2) (not (_unused _s12)) (_unused _s18))
+          :parameters (o8 p288 #g0)
+          :precondition (and (ispose o8 p288) (isgrasp o8 #g0))
+          :effect (and (isconf #q0) (istraj #t1) (iskin o8 p288 #g0 #q0 #t1) (not (_unused _s11)) (_unused _s17))
    )
    (:action s20_inverse-kinematics
           :parameters (o8 #p1 #g0)
           :precondition (and (ispose o8 #p1) (isgrasp o8 #g0))
-          :effect (and (isconf #q3) (istraj #t4) (iskin o8 #p1 #g0 #q3 #t4) (not (_unused _s11)) (not (_unused _s1)) (_unused _s20))
+          :effect (and (isconf #q3) (istraj #t4) (iskin o8 #p1 #g0 #q3 #t4) (not (_unused _s1)) (not (_unused _s11)) (_unused _s20))
    )
-   (:action s21_inverse-kinematics
-          :parameters (o9 #p2 #g1)
-          :precondition (and (ispose o9 #p2) (isgrasp o9 #g1))
-          :effect (and (isconf #q4) (istraj #t5) (iskin o9 #p2 #g1 #q4 #t5) (not (_unused _s2)) (not (_unused _s12)) (_unused _s21))
-   )
-   (:action s38_plan-free-motion
-          :parameters (q344 #q1)
-          :precondition (and (isconf q344) (isconf #q1))
-          :effect (and (isfreemotion q344 #t22 #q1) (not (_unused _s18)) (_unused _s38))
+   (:action s37_plan-free-motion
+          :parameters (q808 #q0)
+          :precondition (and (isconf q808) (isconf #q0))
+          :effect (and (isfreemotion q808 #t21 #q0) (not (_unused _s17)) (_unused _s37))
    )
    (:action s64_plan-free-motion
-          :parameters (#q3 q344)
-          :precondition (and (isconf #q3) (isconf q344))
-          :effect (and (isfreemotion #q3 #t48 q344) (not (_unused _s20)) (_unused _s64))
-   )
-   (:action s72_plan-free-motion
-          :parameters (#q4 #q0)
-          :precondition (and (isconf #q4) (isconf #q0))
-          :effect (and (isfreemotion #q4 #t56 #q0) (not (_unused _s21)) (not (_unused _s17)) (_unused _s72))
+          :parameters (#q3 q808)
+          :precondition (and (isconf #q3) (isconf q808))
+          :effect (and (isfreemotion #q3 #t48 q808) (not (_unused _s20)) (_unused _s64))
    )
    (:action s149_plan-holding-motion
           :parameters (#q0 #q3 o8 #g0)
           :precondition (and (isconf #q0) (isconf #q3) (isgrasp o8 #g0))
-          :effect (and (isholdingmotion #q0 #t133 #q3 o8 #g0) (not (_unused _s11)) (not (_unused _s17)) (not (_unused _s20)) (_unused _s149))
-   )
-   (:action s198_plan-holding-motion
-          :parameters (#q1 #q4 o9 #g1)
-          :precondition (and (isconf #q1) (isconf #q4) (isgrasp o9 #g1))
-          :effect (and (isholdingmotion #q1 #t182 #q4 o9 #g1) (not (_unused _s12)) (not (_unused _s21)) (not (_unused _s18)) (_unused _s198))
+          :effect (and (isholdingmotion #q0 #t133 #q3 o8 #g0) (not (_unused _s17)) (not (_unused _s11)) (not (_unused _s20)) (_unused _s149))
    )
 )
