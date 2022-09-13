@@ -1,0 +1,3 @@
+[submodule "symk"]
+	path = symk
+	url = git@github.com:ttianyuren/symk.git
