@@ -1,8 +1,8 @@
 ## To start
 
 1. `git clone --recurse-submodules [url]`: to clone this repo with submodules
-1. `./symk/build.py `: to build the symk planner
-
+2. `sudo apt-get -y install cmake g++ make python3 autoconf automake`: to install dependencies for symk
+3. `./symk/build.py `: to build the [symk](symk) planner
 
 
 ## Run examples
