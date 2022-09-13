@@ -1,5 +1,6 @@
 import time
-from collections import Counter, defaultdict, namedtuple, Sequence
+from collections import Counter, defaultdict, namedtuple
+from collections.abc import Sequence
 from itertools import count
 
 from .pddlstream.language.constants import AND, get_prefix, get_args, is_parameter, Fact, concatenate, StreamAction

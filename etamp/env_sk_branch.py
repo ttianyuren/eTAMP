@@ -14,7 +14,7 @@ from .constraint_graph import Constraint
 from collections import defaultdict
 import networkx as nx
 
-from BO.bo_one_piece import suggest_from_MCTS
+# from BO.bo_one_piece import suggest_from_MCTS
 
 # from BO.fit_suggestion_prod import suggest_from_CP
 # from BO.fit_suggestion_multi import suggest_from_CP

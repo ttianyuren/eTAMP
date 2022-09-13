@@ -1,5 +1,6 @@
 import time
-from collections import Iterator, namedtuple, deque
+from collections import namedtuple, deque
+from collections.abc import Iterator
 from itertools import count
 
 from ..utils import INF, elapsed_time

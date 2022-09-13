@@ -2,7 +2,7 @@ import time
 from copy import deepcopy, copy
 import numpy as np
 import random
-from pympler.asizeof import asizeof
+
 from collections import namedtuple
 from .pddlstream.language.constants import pAtom
 from .stream import is_active_arg

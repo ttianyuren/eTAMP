@@ -5,7 +5,7 @@ from collections import namedtuple
 import pickle as pk
 from .constraint_graph import Constraint, update_constraint_dict, get_op_to_decision, rename_stream, update_constraint
 from collections import defaultdict
-from BO.fit_suggestion import suggest_from_CP
+# from BO.fit_suggestion import suggest_from_CP
 
 # Continuous move: p1: seed_lower_bound, p2: seed_upper_bound
 # Discrete move: p1: available_moves, p2: covariance matrix

@@ -13,7 +13,7 @@ from .pddlstream.language.conversion import pddl2obj
 from copy import deepcopy, copy
 
 import itertools
-from symk.main import run_symk
+from .connect_topk import run_symk
 from .stream import is_active_arg, StreamResult
 from utils.pybullet_tools.utils import HideOutput
 
