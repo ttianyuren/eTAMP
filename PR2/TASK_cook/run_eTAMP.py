@@ -27,6 +27,8 @@ def exp():
     e_root = ExtendedNode()
 
     concrete_plan = None
+
+
     num_attempts = 0
     thinking_time = 0
     while concrete_plan is None and thinking_time < 300:

@@ -29,8 +29,11 @@ def eTAMP_session():
 
     st = time.time()
 
+
+    file_dir = os.path.dirname(os.path.realpath(__file__))
     sk_batch = solve_progressive2(pddlstream_problem,
-                                  num_optms_init=80, target_sk=50)
+                                  num_optms_init=80, target_sk=50, path_domain_file=file_dir + '/pddl/domain.pddl',
+                                  path_stream_file=file_dir + '/pddl/stream.pddl')
 
     e_root = ExtendedNode()
 
