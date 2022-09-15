@@ -65,6 +65,7 @@ class OptimalNode(object):
 
     def __str__(self):
         return self.__class__.__name__ + '(' + str(self.config) + ')'
+
     __repr__ = __str__
 
 
@@ -77,7 +78,8 @@ def safe_path(sequence, collision):
     return path
 
 
-def rrt_star(start, goal, distance, sample, extend, collision, radius, max_time=INF, max_iterations=INF, goal_probability=.2, informed=True):
+def rrt_star(start, goal, distance, sample, extend, collision, radius, max_time=INF, max_iterations=INF,
+             goal_probability=.2, informed=True):
     if collision(start) or collision(goal):
         return None
     nodes = [OptimalNode(start)]
@@ -91,7 +93,7 @@ def rrt_star(start, goal, distance, sample, extend, collision, radius, max_time=
         if informed and goal_n is not None and distance(start, s) + distance(s, goal) >= goal_n.cost:
             continue
         if it % 100 == 0:
-            print it, time() - t0, goal_n is not None, do_goal, (goal_n.cost if goal_n is not None else INF)
+            print(it, time() - t0, goal_n is not None, do_goal, (goal_n.cost if goal_n is not None else INF))
         it += 1
 
         nearest = argmin(lambda n: distance(n.config, s), nodes)
