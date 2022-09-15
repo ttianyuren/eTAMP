@@ -64,7 +64,7 @@ def run_symk(domain_file='testIO_symk/domain.pddl', problem_file='testIO_symk/pr
     # sys.exit(exitcode)
     result_files = [plan_dir + '/' + file for file in os.listdir(plan_dir)]
 
-    list_id = [int(file.split('.')[1]) for file in result_files]
+    list_id = [int(os.path.splitext(file)[1][1:]) for file in result_files]
     result_files_sorted = []  # sorted result files by name
     for i in range(len(list_id)):
         result_files_sorted.append(result_files[list_id.index(i + 1)])
