@@ -662,22 +662,19 @@ def run_pddl_planner(nt_domain, nt_problem, target_result_num, result_dir_name,
 
     domain_path = path_task + '/' + PDDL_DIR + '/' + pddl_file_prefix + '_domain.pddl'
     problem_path = path_task + '/' + PDDL_DIR + '/' + pddl_file_prefix + '_problem.pddl'
-    result_path = path_task + '/' + result_dir_name + '/' + pddl_file_prefix + '_sas'
+    result_dir = path_task + '/' + result_dir_name
+    result_path = result_dir + '/' + pddl_file_prefix + '_sas'
 
     dump_domain(nt_domain, domain_path, pddl_comment)
     dump_problem(nt_problem, problem_path, pddl_comment)
 
+    # domain_path = '/home/tianyu/MyAPP/eTAMP/PR2/TASK_cook/pddl/A_ap_domain0.pddl'
+    # problem_path = '/home/tianyu/MyAPP/eTAMP/PR2/TASK_cook/pddl/A_ap_problem0.pddl'
+
     with HideOutput():
-        run_symk(domain_path, problem_path, result_path, num_plan=target_result_num)
+        result_files_sorted = run_symk(domain_path, problem_path, result_path, num_plan=target_result_num)
 
-    result_files = [path_task + '/' + result_dir_name + '/' + file
-                    for file in os.listdir(result_dir_name)]
-    list_id = [int(file.split('.')[1]) for file in result_files]
-    list_files = []
-    for i in range(len(list_id)):
-        list_files.append(result_files[list_id.index(i + 1)])
-
-    return list_files
+    return result_files_sorted
 
 
 def get_inst_action_mapping(file_path='instantiated_actions.pk'):

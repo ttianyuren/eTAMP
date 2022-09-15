@@ -62,12 +62,24 @@ def run_symk(domain_file='testIO_symk/domain.pddl', problem_file='testIO_symk/pr
     # This means for example that if no plan was found, validate is not run,
     # and therefore the return code is that of the search.
     # sys.exit(exitcode)
+    result_files = [plan_dir + '/' + file for file in os.listdir(plan_dir)]
+
+    list_id = [int(file.split('.')[1]) for file in result_files]
+    result_files_sorted = []  # sorted result files by name
+    for i in range(len(list_id)):
+        result_files_sorted.append(result_files[list_id.index(i + 1)])
+
+    return result_files_sorted
 
 
 if __name__ == "__main__":
+    run_symk('/home/tianyu/MyAPP/eTAMP/PR2/TASK_cook/pddl/A_ap_domain0.pddl',
+             '/home/tianyu/MyAPP/eTAMP/PR2/TASK_cook/pddl/A_ap_problem0.pddl',
+             '/home/tianyu/MyAPP/eTAMP/PR2/TASK_cook/A_actionPlans/A_ap_sas',
+             num_plan=75)
     # run_symk('/home/tianyu/MyAPP/eTAMP/PR2/TASK_cook/pddl/A_ap_domain.pddl',
     #          '/home/tianyu/MyAPP/eTAMP/PR2/TASK_cook/pddl/A_ap_problem.pddl')
     # run_symk('/home/tianyu/MyAPP/eTAMP/PR2/TASK_cook/pddl/B_fp_domain.pddl',
     #          '/home/tianyu/MyAPP/eTAMP/PR2/TASK_cook/pddl/B_fp_problem.pddl')
-    run_symk('/home/tianyu/MyAPP/eTAMP/PR2/TASK_cook/pddl/C_op_domain.pddl',
-             '/home/tianyu/MyAPP/eTAMP/PR2/TASK_cook/pddl/C_op_problem.pddl')
+    # run_symk('/home/tianyu/MyAPP/eTAMP/PR2/TASK_cook/pddl/C_op_domain.pddl',
+    #          '/home/tianyu/MyAPP/eTAMP/PR2/TASK_cook/pddl/C_op_problem.pddl')
