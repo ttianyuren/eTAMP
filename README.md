@@ -1,15 +1,15 @@
 ## To start
 
 1. `git clone --recurse-submodules [url]`: to clone this repo with submodules
+3. `cd eTAMP`
 2. `sudo apt-get -y install cmake g++ make python3 autoconf automake`: to install dependencies for symk
-3. `./symk/build.py `: to build the [symk](symk) planner
+3. `pip3 install -r requirements.txt`
+4. `./symk/build.py `: to build the [symk](symk) planner
+5. `export PYTHONPATH="[full path of the repo]`
 
 
 ## Run examples
 
-```console
-export PYTHONPATH="[full path of the repo]"
-```
 
 ### Kitchen
 
