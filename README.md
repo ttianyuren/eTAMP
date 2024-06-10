@@ -1,6 +1,6 @@
 ## To start
 
-1. `git clone --recurse-submodules git@github.com:ttianyuren/eTAMP.git`: to clone this repo with submodules
+1. `git clone --recurse-submodules https://github.com/ttianyuren/eTAMP.git`: to clone this repo with submodules
 3. `cd eTAMP`
 2. `sudo apt-get -y install cmake g++ make python3 autoconf automake`: to install dependencies for symk
 3. `pip3 install -r requirements.txt`
